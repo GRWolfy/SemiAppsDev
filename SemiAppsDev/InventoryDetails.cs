@@ -66,14 +66,22 @@ namespace SemiAppsDev
 
       private void InventoryDetails_Load(object sender, EventArgs e)
       {
-         ViewInvetory();
+         ViewProduct();
+         ViewInventoryDetails();
       }
 
-      private void ViewInvetory()
+      private void ViewProduct()
       {
          Connection.Connection.DB();
-         Functions.Function.gen = "SELECT productcategory.productcategoryid AS [CATEGORY ID], productcategory.productcategoryname AS [PRODUCT NAME], product.productid AS [PRODUCT ID], product.productname AS [PRODUCT NAME],product.price AS [PRICE], product.stockonhand AS [STOCK ON HAND], product.productdateencoded AS [DATE], product.productencodedby AS [ENCODED BY] FROM productcategory INNER JOIN product ON productcategory.productcategoryid = product.productcategoryid";
+         Functions.Function.gen = "SELECT productcategory.productcategoryid AS [CATEGORY ID], productcategory.productcategoryname AS [PRODUCT NAME], product.productid AS [PRODUCT ID], product.productname AS [PRODUCT NAME], product.price AS [PRICE], product.stockonhand AS [STOCK ON HAND], product.productdateencoded AS [DATE], product.productencodedby AS [ENCODED BY] FROM productcategory INNER JOIN product ON productcategory.productcategoryid = product.productcategoryid WHERE NOT EXISTS (SELECT * FROM inventorydetails WHERE product.productid = inventorydetails.productid);";
          Functions.Function.fill(Functions.Function.gen, dataGridProduct);
+      }
+
+      private void ViewInventoryDetails()
+      {
+         Connection.Connection.DB();
+         Functions.Function.gen = "SELECT inventorydetails.inventoryid AS [INVENTORY ID], product.productname AS [PRODUCT NAME], product.price AS [PRICE], product.stockonhand AS [STOCK ON HAND], productcategory.productcategoryname AS [CATEGORY NAME],  inventorydetails.stockout AS [STOCK OUT], product.reorderstock AS [REORDER STOCK], inventorydetails.totalsales AS [TOTAL SALES], inventorydetails.inventorydate [INVENTORY DATE], inventorydetails.inventoryencodedby AS [INVENTORY ENCODED BY] FROM inventorydetails INNER JOIN product ON inventorydetails.productid = product.productid INNER JOIN productcategory ON product.productcategoryid = productcategory.productcategoryid";
+         Functions.Function.fill(Functions.Function.gen, dataGridInventory);
       }
 
       private void btnSave_Click(object sender, EventArgs e)
@@ -84,10 +92,10 @@ namespace SemiAppsDev
          try
          {
             Connection.Connection.DB();
-            Functions.Function.gen = "INSERT INTO inventorydetails(productid, stockout, totalsales, inventorydate, inventorycodedby) VALUES('" + txtProductID.Text + "', '" + txtStockout.Text + "', '"+ totalsales +"', '" + DateTime.Now.ToString("dd-MM-yyyy") + "', '"+ name + "'); UPDATE product SET stockonhand = '" + stockonhand + "' WHERE productid = '" + txtProductID.Text + "' ";
+            Functions.Function.gen = "INSERT INTO inventorydetails(productid, stockout, totalsales, inventorydate, inventoryencodedby) VALUES('" + txtProductID.Text + "', '" + txtStockout.Text + "', '"+ totalsales +"', '" + DateTime.Now.ToString("dd-MM-yyyy") + "', '"+ name + "'); UPDATE product SET stockonhand = '" + stockonhand + "' WHERE productid = '" + txtProductID.Text + "' ";
             Functions.Function.command = new SqlCommand(Functions.Function.gen, Connection.Connection.con);
             Functions.Function.command.ExecuteNonQuery();
-            MessageBox.Show("Saved.", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Saved", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
             tabControlInvetory.SelectedIndex = 1;
             Connection.Connection.con.Close();
 
@@ -125,6 +133,30 @@ namespace SemiAppsDev
             var reorder = new Reorder();
             reorder.Show();
             Hide();
+         }
+      }
+
+      private void btnDelete_Click(object sender, EventArgs e)
+      {
+         try
+         {
+            Connection.Connection.DB();
+            var gen = MessageBox.Show("Are you sure you want to delete this record?", "Delete record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (gen == DialogResult.Yes)
+            {
+               Functions.Function.gen = "DELETE FROM inventorydetails WHERE inventoryid = '" + txtInvetoryID.Text + "' ";
+               Functions.Function.command = new SqlCommand(Functions.Function.gen, Connection.Connection.con);
+               Functions.Function.command.ExecuteNonQuery();
+               Connection.Connection.con.Close();
+               InventoryDetails_Load(sender, e);
+               tabControlInvetory.SelectedIndex = 1;
+            }
+         }
+
+         catch (Exception ex)
+         {
+            MessageBox.Show(ex.Message);
          }
       }
    }

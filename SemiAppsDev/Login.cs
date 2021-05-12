@@ -15,7 +15,7 @@ namespace SemiAppsDev
    {
       public static string setfirstname = "";
       public static string setlastname = "";
-      public static int setuserId = 0;
+      public static int setclerkid = 0;
 
       public Login()
       {
@@ -79,7 +79,7 @@ namespace SemiAppsDev
                Functions.Function.reader.Read();
                setfirstname = Functions.Function.reader["firstName"].ToString();
                setlastname = Functions.Function.reader["lastName"].ToString();
-               setuserId = Convert.ToInt32(Functions.Function.reader["userid"]);
+               setclerkid = Convert.ToInt32(Functions.Function.reader["clerkid"]);
 
                var dashboard = new Dashboard();
                dashboard.Show();

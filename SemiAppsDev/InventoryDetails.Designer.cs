@@ -38,6 +38,8 @@ namespace SemiAppsDev
          this.btnDashboard = new System.Windows.Forms.Button();
          this.tabControlInvetory = new System.Windows.Forms.TabControl();
          this.tabPage1 = new System.Windows.Forms.TabPage();
+         this.txtInvetoryID = new System.Windows.Forms.TextBox();
+         this.btnDelete = new System.Windows.Forms.Button();
          this.txtProductID = new System.Windows.Forms.TextBox();
          this.txtCategoryID = new System.Windows.Forms.TextBox();
          this.cmbCategory = new System.Windows.Forms.ComboBox();
@@ -48,6 +50,7 @@ namespace SemiAppsDev
          this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
          this.label3 = new System.Windows.Forms.Label();
          this.label2 = new System.Windows.Forms.Label();
+         this.txtStockout = new System.Windows.Forms.TextBox();
          this.txtStockonHand = new System.Windows.Forms.TextBox();
          this.txtPrice = new System.Windows.Forms.TextBox();
          this.txtProductname = new System.Windows.Forms.TextBox();
@@ -55,17 +58,20 @@ namespace SemiAppsDev
          this.btnUpdate = new System.Windows.Forms.Button();
          this.btnSave = new System.Windows.Forms.Button();
          this.tabPage2 = new System.Windows.Forms.TabPage();
+         this.label8 = new System.Windows.Forms.Label();
          this.txtSearch = new System.Windows.Forms.TextBox();
          this.dataGridProduct = new System.Windows.Forms.DataGridView();
-         this.txtStockout = new System.Windows.Forms.TextBox();
-         this.btnDelete = new System.Windows.Forms.Button();
-         this.label8 = new System.Windows.Forms.Label();
-         this.txtInvetoryID = new System.Windows.Forms.TextBox();
+         this.tabPage3 = new System.Windows.Forms.TabPage();
+         this.label9 = new System.Windows.Forms.Label();
+         this.textBox1 = new System.Windows.Forms.TextBox();
+         this.dataGridInventory = new System.Windows.Forms.DataGridView();
          this.panel1.SuspendLayout();
          this.tabControlInvetory.SuspendLayout();
          this.tabPage1.SuspendLayout();
          this.tabPage2.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize)(this.dataGridProduct)).BeginInit();
+         this.tabPage3.SuspendLayout();
+         ((System.ComponentModel.ISupportInitialize)(this.dataGridInventory)).BeginInit();
          this.SuspendLayout();
          // 
          // panel1
@@ -145,6 +151,7 @@ namespace SemiAppsDev
          // 
          this.tabControlInvetory.Controls.Add(this.tabPage1);
          this.tabControlInvetory.Controls.Add(this.tabPage2);
+         this.tabControlInvetory.Controls.Add(this.tabPage3);
          this.tabControlInvetory.Location = new System.Drawing.Point(214, 45);
          this.tabControlInvetory.Name = "tabControlInvetory";
          this.tabControlInvetory.SelectedIndex = 0;
@@ -180,6 +187,24 @@ namespace SemiAppsDev
          this.tabPage1.Text = "Add | Update Inventory";
          this.tabPage1.UseVisualStyleBackColor = true;
          // 
+         // txtInvetoryID
+         // 
+         this.txtInvetoryID.Location = new System.Drawing.Point(326, 86);
+         this.txtInvetoryID.Name = "txtInvetoryID";
+         this.txtInvetoryID.Size = new System.Drawing.Size(154, 20);
+         this.txtInvetoryID.TabIndex = 20;
+         this.txtInvetoryID.Visible = false;
+         // 
+         // btnDelete
+         // 
+         this.btnDelete.Location = new System.Drawing.Point(389, 278);
+         this.btnDelete.Name = "btnDelete";
+         this.btnDelete.Size = new System.Drawing.Size(75, 23);
+         this.btnDelete.TabIndex = 19;
+         this.btnDelete.Text = "Delete";
+         this.btnDelete.UseVisualStyleBackColor = true;
+         this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+         // 
          // txtProductID
          // 
          this.txtProductID.Location = new System.Drawing.Point(326, 60);
@@ -198,7 +223,6 @@ namespace SemiAppsDev
          // 
          // cmbCategory
          // 
-         this.cmbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
          this.cmbCategory.Enabled = false;
          this.cmbCategory.FormattingEnabled = true;
          this.cmbCategory.Location = new System.Drawing.Point(126, 29);
@@ -267,6 +291,13 @@ namespace SemiAppsDev
          this.label2.TabIndex = 9;
          this.label2.Text = "Price";
          // 
+         // txtStockout
+         // 
+         this.txtStockout.Location = new System.Drawing.Point(126, 243);
+         this.txtStockout.Name = "txtStockout";
+         this.txtStockout.Size = new System.Drawing.Size(154, 20);
+         this.txtStockout.TabIndex = 8;
+         // 
          // txtStockonHand
          // 
          this.txtStockonHand.Enabled = false;
@@ -329,8 +360,17 @@ namespace SemiAppsDev
          this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
          this.tabPage2.Size = new System.Drawing.Size(543, 326);
          this.tabPage2.TabIndex = 1;
-         this.tabPage2.Text = "View Inventory";
+         this.tabPage2.Text = "View Product";
          this.tabPage2.UseVisualStyleBackColor = true;
+         // 
+         // label8
+         // 
+         this.label8.AutoSize = true;
+         this.label8.Location = new System.Drawing.Point(186, 10);
+         this.label8.Name = "label8";
+         this.label8.Size = new System.Drawing.Size(41, 13);
+         this.label8.TabIndex = 15;
+         this.label8.Text = "Search";
          // 
          // txtSearch
          // 
@@ -348,38 +388,41 @@ namespace SemiAppsDev
          this.dataGridProduct.TabIndex = 0;
          this.dataGridProduct.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridProduct_CellMouseClick);
          // 
-         // txtStockout
+         // tabPage3
          // 
-         this.txtStockout.Location = new System.Drawing.Point(126, 243);
-         this.txtStockout.Name = "txtStockout";
-         this.txtStockout.Size = new System.Drawing.Size(154, 20);
-         this.txtStockout.TabIndex = 8;
+         this.tabPage3.Controls.Add(this.label9);
+         this.tabPage3.Controls.Add(this.textBox1);
+         this.tabPage3.Controls.Add(this.dataGridInventory);
+         this.tabPage3.Location = new System.Drawing.Point(4, 22);
+         this.tabPage3.Name = "tabPage3";
+         this.tabPage3.Size = new System.Drawing.Size(543, 326);
+         this.tabPage3.TabIndex = 2;
+         this.tabPage3.Text = "View Inventory Details";
+         this.tabPage3.UseVisualStyleBackColor = true;
          // 
-         // btnDelete
+         // label9
          // 
-         this.btnDelete.Location = new System.Drawing.Point(389, 278);
-         this.btnDelete.Name = "btnDelete";
-         this.btnDelete.Size = new System.Drawing.Size(75, 23);
-         this.btnDelete.TabIndex = 19;
-         this.btnDelete.Text = "Delete";
-         this.btnDelete.UseVisualStyleBackColor = true;
+         this.label9.AutoSize = true;
+         this.label9.Location = new System.Drawing.Point(186, 10);
+         this.label9.Name = "label9";
+         this.label9.Size = new System.Drawing.Size(41, 13);
+         this.label9.TabIndex = 18;
+         this.label9.Text = "Search";
          // 
-         // label8
+         // textBox1
          // 
-         this.label8.AutoSize = true;
-         this.label8.Location = new System.Drawing.Point(186, 10);
-         this.label8.Name = "label8";
-         this.label8.Size = new System.Drawing.Size(41, 13);
-         this.label8.TabIndex = 15;
-         this.label8.Text = "Search";
+         this.textBox1.Location = new System.Drawing.Point(242, 7);
+         this.textBox1.Name = "textBox1";
+         this.textBox1.Size = new System.Drawing.Size(100, 20);
+         this.textBox1.TabIndex = 17;
          // 
-         // txtInvetoryID
+         // dataGridInventory
          // 
-         this.txtInvetoryID.Location = new System.Drawing.Point(326, 86);
-         this.txtInvetoryID.Name = "txtInvetoryID";
-         this.txtInvetoryID.Size = new System.Drawing.Size(154, 20);
-         this.txtInvetoryID.TabIndex = 20;
-         this.txtInvetoryID.Visible = false;
+         this.dataGridInventory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+         this.dataGridInventory.Location = new System.Drawing.Point(3, 38);
+         this.dataGridInventory.Name = "dataGridInventory";
+         this.dataGridInventory.Size = new System.Drawing.Size(537, 282);
+         this.dataGridInventory.TabIndex = 16;
          // 
          // InventoryDetails
          // 
@@ -399,6 +442,9 @@ namespace SemiAppsDev
          this.tabPage2.ResumeLayout(false);
          this.tabPage2.PerformLayout();
          ((System.ComponentModel.ISupportInitialize)(this.dataGridProduct)).EndInit();
+         this.tabPage3.ResumeLayout(false);
+         this.tabPage3.PerformLayout();
+         ((System.ComponentModel.ISupportInitialize)(this.dataGridInventory)).EndInit();
          this.ResumeLayout(false);
 
       }
@@ -437,5 +483,9 @@ namespace SemiAppsDev
       private System.Windows.Forms.Button btnDelete;
       private System.Windows.Forms.Label label8;
       private System.Windows.Forms.TextBox txtInvetoryID;
+      private System.Windows.Forms.TabPage tabPage3;
+      private System.Windows.Forms.Label label9;
+      private System.Windows.Forms.TextBox textBox1;
+      private System.Windows.Forms.DataGridView dataGridInventory;
    }
 }
