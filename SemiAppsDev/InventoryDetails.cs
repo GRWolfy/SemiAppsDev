@@ -14,6 +14,8 @@ namespace SemiAppsDev
    public partial class InventoryDetails : Form
    {
       private string name = Login.setfirstname + " " + Login.setlastname;
+      public static int setproductid = 0;
+      public static int setstockonhand = 0;
 
       public InventoryDetails()
       {
@@ -109,6 +111,21 @@ namespace SemiAppsDev
          btnUpdate.Enabled = true;
          //btnSave.Enabled = false;
          tabControlInvetory.SelectedIndex = 0;
+         StockChecker(Convert.ToInt32(txtStockonHand.Text), Convert.ToInt32(txtProductID.Text));
+      }
+
+      private void StockChecker(int stock, int productid)
+      {
+         if (stock <= 100)
+         {
+            setproductid = productid;
+            setstockonhand = stock;
+            txtStockout.Enabled = false;
+            MessageBox.Show("Stocks are available for  Restock! Stock-outs are no longer permitted.", "ALERT!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            var reorder = new Reorder();
+            reorder.Show();
+            Hide();
+         }
       }
    }
 }
