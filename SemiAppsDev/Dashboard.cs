@@ -64,7 +64,7 @@ namespace SemiAppsDev
       {
          Connection.Connection.DB();
          //Functions.Function.gen = "SELECT productcategory.productcategoryname AS [CATEGORY NAME], product.productname AS [PRODUCT NAME], product.price AS [PRICE] FROM productcategory INNER JOIN product ON product.productcategoryid = productcategory.productcategoryid WHERE productcategory.productcategoryid = '"+ txtCategoryID.Text +"' ";
-         Functions.Function.gen = "SELECT productcategory.productcategoryname AS [CATEGORY NAME], product.productname AS [PRODUCT NAME],product.price AS [PRICE], product.stockonhand AS [STOCK ON HAND], product.productdateencoded AS [DATE], product.productencodedby AS [ENCODED BY] FROM productcategory INNER JOIN product ON productcategory.productcategoryid = product.productcategoryid WHERE productcategory.productcategoryid = '"+ txtCategoryID.Text +"' ";
+         Functions.Function.gen = "SELECT productcategory.productcategoryname AS [CATEGORY NAME], product.productname AS [PRODUCT NAME],product.price AS [PRICE], product.stockonhand AS [STOCK ON HAND], product.productdateencoded AS [DATE], product.productencodedby AS [ENCODED BY] FROM productcategory INNER JOIN product ON productcategory.productcategoryid = product.productcategoryid WHERE productcategory.productcategoryid = '" + txtCategoryID.Text + "' ";
          Functions.Function.fill(Functions.Function.gen, dataGridCategory);
       }
 
@@ -89,11 +89,112 @@ namespace SemiAppsDev
             MessageBox.Show(ex.Message);
          }
       }
-
+      /*
+      - [ ] Overall-Total  product 
+      - [ ] Overall-Stock on hand  
+      - [ ] Overall-Stock out  
+      - [ ] Overall-Total Sales
+       */
       private void Dashboard_Load(object sender, EventArgs e)
       {
          setComboBox();
          viewByCategory();
+         displayTotalProduct();
+         displayStockonHand();
+         displayTotalSales();
+         displayStockout();
+      }
+
+      private void displayStockout()
+      {
+         try
+         {
+            Connection.Connection.DB();
+            Functions.Function.gen = "SELECT SUM(stockout) AS total FROM inventorydetails";
+            Functions.Function.command = new SqlCommand(Functions.Function.gen, Connection.Connection.con);
+            Functions.Function.reader = Functions.Function.command.ExecuteReader();
+
+            if (Functions.Function.reader.HasRows)
+            {
+               Functions.Function.reader.Read();
+               lblStockOut.Text = (Functions.Function.reader["total"].ToString());
+            }
+         }
+
+         catch (Exception ex)
+         {
+            Connection.Connection.con.Close();
+            MessageBox.Show(ex.Message);
+         }
+      }
+
+      private void displayTotalSales()
+      {
+         try
+         {
+            Connection.Connection.DB();
+            Functions.Function.gen = "SELECT SUM(totalsales) AS total FROM inventorydetails";
+            Functions.Function.command = new SqlCommand(Functions.Function.gen, Connection.Connection.con);
+            Functions.Function.reader = Functions.Function.command.ExecuteReader();
+
+            if (Functions.Function.reader.HasRows)
+            {
+               Functions.Function.reader.Read();
+               lblTotalSales.Text = (Functions.Function.reader["total"].ToString());
+            }
+         }
+
+         catch (Exception ex)
+         {
+            Connection.Connection.con.Close();
+            MessageBox.Show(ex.Message);
+         }
+      }
+
+      private void displayStockonHand()
+      {
+         try
+         {
+            Connection.Connection.DB();
+            Functions.Function.gen = "SELECT SUM(stockonhand) AS total FROM product";
+            Functions.Function.command = new SqlCommand(Functions.Function.gen, Connection.Connection.con);
+            Functions.Function.reader = Functions.Function.command.ExecuteReader();
+
+            if (Functions.Function.reader.HasRows)
+            {
+               Functions.Function.reader.Read();
+               lblStockonHand.Text = (Functions.Function.reader["total"].ToString());
+            }
+         }
+
+         catch (Exception ex)
+         {
+            Connection.Connection.con.Close();
+            MessageBox.Show(ex.Message);
+         }
+      }
+
+      private void displayTotalProduct()
+      {
+         try
+         {
+            Connection.Connection.DB();
+            Functions.Function.gen = "SELECT COUNT(*) AS total FROM product";
+            Functions.Function.command = new SqlCommand(Functions.Function.gen, Connection.Connection.con);
+            Functions.Function.reader = Functions.Function.command.ExecuteReader();
+
+            if (Functions.Function.reader.HasRows)
+            {
+               Functions.Function.reader.Read();
+               lblTotalProduct.Text = (Functions.Function.reader["total"].ToString());
+            }
+         }
+
+         catch (Exception ex)
+         {
+            Connection.Connection.con.Close();
+            MessageBox.Show(ex.Message);
+         }
       }
 
       private void cmbCategory_SelectedIndexChanged(object sender, EventArgs e)

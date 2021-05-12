@@ -48,7 +48,6 @@ namespace SemiAppsDev
          this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
          this.label3 = new System.Windows.Forms.Label();
          this.label2 = new System.Windows.Forms.Label();
-         this.txtReorder = new System.Windows.Forms.TextBox();
          this.txtStockonHand = new System.Windows.Forms.TextBox();
          this.txtPrice = new System.Windows.Forms.TextBox();
          this.txtProductname = new System.Windows.Forms.TextBox();
@@ -58,6 +57,10 @@ namespace SemiAppsDev
          this.tabPage2 = new System.Windows.Forms.TabPage();
          this.txtSearch = new System.Windows.Forms.TextBox();
          this.dataGridProduct = new System.Windows.Forms.DataGridView();
+         this.txtStockout = new System.Windows.Forms.TextBox();
+         this.btnDelete = new System.Windows.Forms.Button();
+         this.label8 = new System.Windows.Forms.Label();
+         this.txtInvetoryID = new System.Windows.Forms.TextBox();
          this.panel1.SuspendLayout();
          this.tabControlInvetory.SuspendLayout();
          this.tabPage1.SuspendLayout();
@@ -150,6 +153,8 @@ namespace SemiAppsDev
          // 
          // tabPage1
          // 
+         this.tabPage1.Controls.Add(this.txtInvetoryID);
+         this.tabPage1.Controls.Add(this.btnDelete);
          this.tabPage1.Controls.Add(this.txtProductID);
          this.tabPage1.Controls.Add(this.txtCategoryID);
          this.tabPage1.Controls.Add(this.cmbCategory);
@@ -160,7 +165,7 @@ namespace SemiAppsDev
          this.tabPage1.Controls.Add(this.dateTimePicker);
          this.tabPage1.Controls.Add(this.label3);
          this.tabPage1.Controls.Add(this.label2);
-         this.tabPage1.Controls.Add(this.txtReorder);
+         this.tabPage1.Controls.Add(this.txtStockout);
          this.tabPage1.Controls.Add(this.txtStockonHand);
          this.tabPage1.Controls.Add(this.txtPrice);
          this.tabPage1.Controls.Add(this.txtProductname);
@@ -194,6 +199,7 @@ namespace SemiAppsDev
          // cmbCategory
          // 
          this.cmbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+         this.cmbCategory.Enabled = false;
          this.cmbCategory.FormattingEnabled = true;
          this.cmbCategory.Location = new System.Drawing.Point(126, 29);
          this.cmbCategory.Name = "cmbCategory";
@@ -205,9 +211,9 @@ namespace SemiAppsDev
          this.label7.AutoSize = true;
          this.label7.Location = new System.Drawing.Point(46, 250);
          this.label7.Name = "label7";
-         this.label7.Size = new System.Drawing.Size(74, 13);
+         this.label7.Size = new System.Drawing.Size(53, 13);
          this.label7.TabIndex = 15;
-         this.label7.Text = "Reorder stock";
+         this.label7.Text = "Stock out";
          // 
          // label6
          // 
@@ -237,6 +243,7 @@ namespace SemiAppsDev
          // 
          // dateTimePicker
          // 
+         this.dateTimePicker.Enabled = false;
          this.dateTimePicker.Location = new System.Drawing.Point(126, 199);
          this.dateTimePicker.Name = "dateTimePicker";
          this.dateTimePicker.Size = new System.Drawing.Size(154, 20);
@@ -260,15 +267,9 @@ namespace SemiAppsDev
          this.label2.TabIndex = 9;
          this.label2.Text = "Price";
          // 
-         // txtReorder
-         // 
-         this.txtReorder.Location = new System.Drawing.Point(126, 243);
-         this.txtReorder.Name = "txtReorder";
-         this.txtReorder.Size = new System.Drawing.Size(154, 20);
-         this.txtReorder.TabIndex = 8;
-         // 
          // txtStockonHand
          // 
+         this.txtStockonHand.Enabled = false;
          this.txtStockonHand.Location = new System.Drawing.Point(126, 152);
          this.txtStockonHand.Name = "txtStockonHand";
          this.txtStockonHand.Size = new System.Drawing.Size(154, 20);
@@ -276,6 +277,7 @@ namespace SemiAppsDev
          // 
          // txtPrice
          // 
+         this.txtPrice.Enabled = false;
          this.txtPrice.Location = new System.Drawing.Point(126, 107);
          this.txtPrice.Name = "txtPrice";
          this.txtPrice.Size = new System.Drawing.Size(154, 20);
@@ -283,6 +285,7 @@ namespace SemiAppsDev
          // 
          // txtProductname
          // 
+         this.txtProductname.Enabled = false;
          this.txtProductname.Location = new System.Drawing.Point(126, 65);
          this.txtProductname.Name = "txtProductname";
          this.txtProductname.Size = new System.Drawing.Size(154, 20);
@@ -314,9 +317,11 @@ namespace SemiAppsDev
          this.btnSave.TabIndex = 0;
          this.btnSave.Text = "Save";
          this.btnSave.UseVisualStyleBackColor = true;
+         this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
          // 
          // tabPage2
          // 
+         this.tabPage2.Controls.Add(this.label8);
          this.tabPage2.Controls.Add(this.txtSearch);
          this.tabPage2.Controls.Add(this.dataGridProduct);
          this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -341,6 +346,40 @@ namespace SemiAppsDev
          this.dataGridProduct.Name = "dataGridProduct";
          this.dataGridProduct.Size = new System.Drawing.Size(537, 282);
          this.dataGridProduct.TabIndex = 0;
+         this.dataGridProduct.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridProduct_CellMouseClick);
+         // 
+         // txtStockout
+         // 
+         this.txtStockout.Location = new System.Drawing.Point(126, 243);
+         this.txtStockout.Name = "txtStockout";
+         this.txtStockout.Size = new System.Drawing.Size(154, 20);
+         this.txtStockout.TabIndex = 8;
+         // 
+         // btnDelete
+         // 
+         this.btnDelete.Location = new System.Drawing.Point(389, 278);
+         this.btnDelete.Name = "btnDelete";
+         this.btnDelete.Size = new System.Drawing.Size(75, 23);
+         this.btnDelete.TabIndex = 19;
+         this.btnDelete.Text = "Delete";
+         this.btnDelete.UseVisualStyleBackColor = true;
+         // 
+         // label8
+         // 
+         this.label8.AutoSize = true;
+         this.label8.Location = new System.Drawing.Point(186, 10);
+         this.label8.Name = "label8";
+         this.label8.Size = new System.Drawing.Size(41, 13);
+         this.label8.TabIndex = 15;
+         this.label8.Text = "Search";
+         // 
+         // txtInvetoryID
+         // 
+         this.txtInvetoryID.Location = new System.Drawing.Point(326, 86);
+         this.txtInvetoryID.Name = "txtInvetoryID";
+         this.txtInvetoryID.Size = new System.Drawing.Size(154, 20);
+         this.txtInvetoryID.TabIndex = 20;
+         this.txtInvetoryID.Visible = false;
          // 
          // InventoryDetails
          // 
@@ -385,7 +424,6 @@ namespace SemiAppsDev
       private System.Windows.Forms.DateTimePicker dateTimePicker;
       private System.Windows.Forms.Label label3;
       private System.Windows.Forms.Label label2;
-      private System.Windows.Forms.TextBox txtReorder;
       private System.Windows.Forms.TextBox txtStockonHand;
       private System.Windows.Forms.TextBox txtPrice;
       private System.Windows.Forms.TextBox txtProductname;
@@ -395,5 +433,9 @@ namespace SemiAppsDev
       private System.Windows.Forms.TabPage tabPage2;
       private System.Windows.Forms.TextBox txtSearch;
       private System.Windows.Forms.DataGridView dataGridProduct;
+      private System.Windows.Forms.TextBox txtStockout;
+      private System.Windows.Forms.Button btnDelete;
+      private System.Windows.Forms.Label label8;
+      private System.Windows.Forms.TextBox txtInvetoryID;
    }
 }

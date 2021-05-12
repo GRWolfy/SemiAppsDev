@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,8 @@ namespace SemiAppsDev
 {
    public partial class InventoryDetails : Form
    {
+      private string name = Login.setfirstname + " " + Login.setlastname;
+
       public InventoryDetails()
       {
          InitializeComponent();
@@ -65,8 +68,47 @@ namespace SemiAppsDev
       }
 
       private void ViewInvetory()
-      { 
-         
+      {
+         Connection.Connection.DB();
+         Functions.Function.gen = "SELECT productcategory.productcategoryid AS [CATEGORY ID], productcategory.productcategoryname AS [PRODUCT NAME], product.productid AS [PRODUCT ID], product.productname AS [PRODUCT NAME],product.price AS [PRICE], product.stockonhand AS [STOCK ON HAND], product.productdateencoded AS [DATE], product.productencodedby AS [ENCODED BY] FROM productcategory INNER JOIN product ON productcategory.productcategoryid = product.productcategoryid";
+         Functions.Function.fill(Functions.Function.gen, dataGridProduct);
+      }
+
+      private void btnSave_Click(object sender, EventArgs e)
+      {
+         int totalsales = Convert.ToInt32(txtPrice.Text) * Convert.ToInt32(txtStockout.Text);
+         int stockonhand = Convert.ToInt32(txtStockonHand.Text) - Convert.ToInt32(txtStockout.Text);
+
+         try
+         {
+            Connection.Connection.DB();
+            Functions.Function.gen = "INSERT INTO inventorydetails(productid, stockout, totalsales, inventorydate, inventorycodedby) VALUES('" + txtProductID.Text + "', '" + txtStockout.Text + "', '"+ totalsales +"', '" + DateTime.Now.ToString("dd-MM-yyyy") + "', '"+ name + "'); UPDATE product SET stockonhand = '" + stockonhand + "' WHERE productid = '" + txtProductID.Text + "' ";
+            Functions.Function.command = new SqlCommand(Functions.Function.gen, Connection.Connection.con);
+            Functions.Function.command.ExecuteNonQuery();
+            MessageBox.Show("Saved.", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            tabControlInvetory.SelectedIndex = 1;
+            Connection.Connection.con.Close();
+
+         }
+
+         catch (Exception ex)
+         {
+            MessageBox.Show(ex.Message);
+         }
+      }
+
+      private void dataGridProduct_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+      {
+         txtCategoryID.Text = dataGridProduct.CurrentRow.Cells[0].Value.ToString();
+         cmbCategory.Text = dataGridProduct.CurrentRow.Cells[1].Value.ToString();
+         txtProductID.Text = dataGridProduct.CurrentRow.Cells[2].Value.ToString();
+         txtProductname.Text = dataGridProduct.CurrentRow.Cells[3].Value.ToString();
+         txtPrice.Text = dataGridProduct.CurrentRow.Cells[4].Value.ToString();
+         txtStockonHand.Text = dataGridProduct.CurrentRow.Cells[5].Value.ToString();
+         dateTimePicker.Value = Convert.ToDateTime(dataGridProduct.Rows[e.RowIndex].Cells[6].Value.ToString());
+         btnUpdate.Enabled = true;
+         //btnSave.Enabled = false;
+         tabControlInvetory.SelectedIndex = 0;
       }
    }
 }
