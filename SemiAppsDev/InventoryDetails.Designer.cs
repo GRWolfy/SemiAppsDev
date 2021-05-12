@@ -56,8 +56,8 @@ namespace SemiAppsDev
          this.btnUpdate = new System.Windows.Forms.Button();
          this.btnSave = new System.Windows.Forms.Button();
          this.tabPage2 = new System.Windows.Forms.TabPage();
-         this.dataGridProduct = new System.Windows.Forms.DataGridView();
          this.txtSearch = new System.Windows.Forms.TextBox();
+         this.dataGridProduct = new System.Windows.Forms.DataGridView();
          this.panel1.SuspendLayout();
          this.tabControlInvetory.SuspendLayout();
          this.tabPage1.SuspendLayout();
@@ -73,7 +73,7 @@ namespace SemiAppsDev
          this.panel1.Controls.Add(this.btnRegister);
          this.panel1.Controls.Add(this.Product);
          this.panel1.Controls.Add(this.btnDashboard);
-         this.panel1.Location = new System.Drawing.Point(12, 24);
+         this.panel1.Location = new System.Drawing.Point(13, 13);
          this.panel1.Name = "panel1";
          this.panel1.Size = new System.Drawing.Size(167, 402);
          this.panel1.TabIndex = 4;
@@ -327,6 +327,13 @@ namespace SemiAppsDev
          this.tabPage2.Text = "View Inventory";
          this.tabPage2.UseVisualStyleBackColor = true;
          // 
+         // txtSearch
+         // 
+         this.txtSearch.Location = new System.Drawing.Point(242, 7);
+         this.txtSearch.Name = "txtSearch";
+         this.txtSearch.Size = new System.Drawing.Size(100, 20);
+         this.txtSearch.TabIndex = 1;
+         // 
          // dataGridProduct
          // 
          this.dataGridProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -334,13 +341,6 @@ namespace SemiAppsDev
          this.dataGridProduct.Name = "dataGridProduct";
          this.dataGridProduct.Size = new System.Drawing.Size(537, 282);
          this.dataGridProduct.TabIndex = 0;
-         // 
-         // txtSearch
-         // 
-         this.txtSearch.Location = new System.Drawing.Point(242, 7);
-         this.txtSearch.Name = "txtSearch";
-         this.txtSearch.Size = new System.Drawing.Size(100, 20);
-         this.txtSearch.TabIndex = 1;
          // 
          // InventoryDetails
          // 
@@ -352,6 +352,7 @@ namespace SemiAppsDev
          this.Name = "InventoryDetails";
          this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
          this.Text = "InventoryDetails";
+         this.Load += new System.EventHandler(this.InventoryDetails_Load);
          this.panel1.ResumeLayout(false);
          this.tabControlInvetory.ResumeLayout(false);
          this.tabPage1.ResumeLayout(false);

@@ -94,7 +94,7 @@ namespace SemiAppsDev
          this.panel1.Controls.Add(this.btnRegister);
          this.panel1.Controls.Add(this.Product);
          this.panel1.Controls.Add(this.btnDashboard);
-         this.panel1.Location = new System.Drawing.Point(12, 25);
+         this.panel1.Location = new System.Drawing.Point(13, 13);
          this.panel1.Name = "panel1";
          this.panel1.Size = new System.Drawing.Size(167, 402);
          this.panel1.TabIndex = 6;

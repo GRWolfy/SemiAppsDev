@@ -37,15 +37,21 @@ namespace SemiAppsDev
          this.btnRegister = new System.Windows.Forms.Button();
          this.Product = new System.Windows.Forms.Button();
          this.btnDashboard = new System.Windows.Forms.Button();
-         this.comboBox1 = new System.Windows.Forms.ComboBox();
+         this.cmbCategory = new System.Windows.Forms.ComboBox();
+         this.dataGridCategory = new System.Windows.Forms.DataGridView();
+         this.label1 = new System.Windows.Forms.Label();
+         this.label2 = new System.Windows.Forms.Label();
+         this.label3 = new System.Windows.Forms.Label();
+         this.txtCategoryID = new System.Windows.Forms.TextBox();
          this.panel1.SuspendLayout();
+         ((System.ComponentModel.ISupportInitialize)(this.dataGridCategory)).BeginInit();
          this.SuspendLayout();
          // 
          // lblTotal
          // 
          this.lblTotal.AutoSize = true;
          this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         this.lblTotal.Location = new System.Drawing.Point(571, 158);
+         this.lblTotal.Location = new System.Drawing.Point(656, 58);
          this.lblTotal.Name = "lblTotal";
          this.lblTotal.Size = new System.Drawing.Size(39, 42);
          this.lblTotal.TabIndex = 1;
@@ -124,26 +130,80 @@ namespace SemiAppsDev
          this.btnDashboard.UseVisualStyleBackColor = true;
          this.btnDashboard.Click += new System.EventHandler(this.btnDashboard_Click);
          // 
-         // comboBox1
+         // cmbCategory
          // 
-         this.comboBox1.FormattingEnabled = true;
-         this.comboBox1.Location = new System.Drawing.Point(214, 178);
-         this.comboBox1.Name = "comboBox1";
-         this.comboBox1.Size = new System.Drawing.Size(121, 21);
-         this.comboBox1.TabIndex = 4;
+         this.cmbCategory.FormattingEnabled = true;
+         this.cmbCategory.Location = new System.Drawing.Point(186, 145);
+         this.cmbCategory.Name = "cmbCategory";
+         this.cmbCategory.Size = new System.Drawing.Size(121, 21);
+         this.cmbCategory.TabIndex = 4;
+         this.cmbCategory.SelectedIndexChanged += new System.EventHandler(this.cmbCategory_SelectedIndexChanged);
+         // 
+         // dataGridCategory
+         // 
+         this.dataGridCategory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+         this.dataGridCategory.Location = new System.Drawing.Point(200, 178);
+         this.dataGridCategory.Name = "dataGridCategory";
+         this.dataGridCategory.Size = new System.Drawing.Size(567, 252);
+         this.dataGridCategory.TabIndex = 5;
+         // 
+         // label1
+         // 
+         this.label1.AutoSize = true;
+         this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.label1.Location = new System.Drawing.Point(548, 58);
+         this.label1.Name = "label1";
+         this.label1.Size = new System.Drawing.Size(39, 42);
+         this.label1.TabIndex = 6;
+         this.label1.Text = "0";
+         // 
+         // label2
+         // 
+         this.label2.AutoSize = true;
+         this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.label2.Location = new System.Drawing.Point(446, 58);
+         this.label2.Name = "label2";
+         this.label2.Size = new System.Drawing.Size(39, 42);
+         this.label2.TabIndex = 7;
+         this.label2.Text = "0";
+         // 
+         // label3
+         // 
+         this.label3.AutoSize = true;
+         this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.label3.Location = new System.Drawing.Point(314, 58);
+         this.label3.Name = "label3";
+         this.label3.Size = new System.Drawing.Size(39, 42);
+         this.label3.TabIndex = 8;
+         this.label3.Text = "0";
+         // 
+         // txtCategoryID
+         // 
+         this.txtCategoryID.Location = new System.Drawing.Point(186, 13);
+         this.txtCategoryID.Name = "txtCategoryID";
+         this.txtCategoryID.Size = new System.Drawing.Size(100, 20);
+         this.txtCategoryID.TabIndex = 9;
+         this.txtCategoryID.Visible = false;
          // 
          // Dashboard
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
          this.ClientSize = new System.Drawing.Size(800, 450);
-         this.Controls.Add(this.comboBox1);
+         this.Controls.Add(this.txtCategoryID);
+         this.Controls.Add(this.label3);
+         this.Controls.Add(this.label2);
+         this.Controls.Add(this.label1);
+         this.Controls.Add(this.dataGridCategory);
+         this.Controls.Add(this.cmbCategory);
          this.Controls.Add(this.panel1);
          this.Controls.Add(this.lblTotal);
          this.Name = "Dashboard";
          this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
          this.Text = "Dashboard";
+         this.Load += new System.EventHandler(this.Dashboard_Load);
          this.panel1.ResumeLayout(false);
+         ((System.ComponentModel.ISupportInitialize)(this.dataGridCategory)).EndInit();
          this.ResumeLayout(false);
          this.PerformLayout();
 
@@ -155,9 +215,14 @@ namespace SemiAppsDev
       private System.Windows.Forms.Button Product;
       private System.Windows.Forms.Button btnDashboard;
       private System.Windows.Forms.Button btnRegister;
-      private System.Windows.Forms.ComboBox comboBox1;
+      private System.Windows.Forms.ComboBox cmbCategory;
       private System.Windows.Forms.Button btnInventory;
       private System.Windows.Forms.Button btnCategory;
       private System.Windows.Forms.Button btnLogin;
+      private System.Windows.Forms.DataGridView dataGridCategory;
+      private System.Windows.Forms.Label label1;
+      private System.Windows.Forms.Label label2;
+      private System.Windows.Forms.Label label3;
+      private System.Windows.Forms.TextBox txtCategoryID;
    }
 }

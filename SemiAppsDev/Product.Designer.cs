@@ -31,14 +31,15 @@ namespace SemiAppsDev
       {
          this.tabControlProduct = new System.Windows.Forms.TabControl();
          this.tabPage1 = new System.Windows.Forms.TabPage();
-         this.label7 = new System.Windows.Forms.Label();
+         this.txtProductID = new System.Windows.Forms.TextBox();
+         this.txtCategoryID = new System.Windows.Forms.TextBox();
+         this.cmbCategory = new System.Windows.Forms.ComboBox();
          this.label6 = new System.Windows.Forms.Label();
          this.label5 = new System.Windows.Forms.Label();
          this.label4 = new System.Windows.Forms.Label();
          this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
          this.label3 = new System.Windows.Forms.Label();
          this.label2 = new System.Windows.Forms.Label();
-         this.txtReorder = new System.Windows.Forms.TextBox();
          this.txtStockonHand = new System.Windows.Forms.TextBox();
          this.txtPrice = new System.Windows.Forms.TextBox();
          this.txtProductname = new System.Windows.Forms.TextBox();
@@ -54,9 +55,6 @@ namespace SemiAppsDev
          this.btnRegister = new System.Windows.Forms.Button();
          this.btnProduct = new System.Windows.Forms.Button();
          this.btnDashboard = new System.Windows.Forms.Button();
-         this.cmbCategory = new System.Windows.Forms.ComboBox();
-         this.txtCategoryID = new System.Windows.Forms.TextBox();
-         this.txtProductID = new System.Windows.Forms.TextBox();
          this.tabControlProduct.SuspendLayout();
          this.tabPage1.SuspendLayout();
          this.tabPage2.SuspendLayout();
@@ -79,14 +77,12 @@ namespace SemiAppsDev
          this.tabPage1.Controls.Add(this.txtProductID);
          this.tabPage1.Controls.Add(this.txtCategoryID);
          this.tabPage1.Controls.Add(this.cmbCategory);
-         this.tabPage1.Controls.Add(this.label7);
          this.tabPage1.Controls.Add(this.label6);
          this.tabPage1.Controls.Add(this.label5);
          this.tabPage1.Controls.Add(this.label4);
          this.tabPage1.Controls.Add(this.dateTimePicker);
          this.tabPage1.Controls.Add(this.label3);
          this.tabPage1.Controls.Add(this.label2);
-         this.tabPage1.Controls.Add(this.txtReorder);
          this.tabPage1.Controls.Add(this.txtStockonHand);
          this.tabPage1.Controls.Add(this.txtPrice);
          this.tabPage1.Controls.Add(this.txtProductname);
@@ -101,14 +97,31 @@ namespace SemiAppsDev
          this.tabPage1.Text = "Add | Update Product";
          this.tabPage1.UseVisualStyleBackColor = true;
          // 
-         // label7
+         // txtProductID
          // 
-         this.label7.AutoSize = true;
-         this.label7.Location = new System.Drawing.Point(46, 250);
-         this.label7.Name = "label7";
-         this.label7.Size = new System.Drawing.Size(74, 13);
-         this.label7.TabIndex = 15;
-         this.label7.Text = "Reorder stock";
+         this.txtProductID.Location = new System.Drawing.Point(326, 60);
+         this.txtProductID.Name = "txtProductID";
+         this.txtProductID.Size = new System.Drawing.Size(154, 20);
+         this.txtProductID.TabIndex = 18;
+         this.txtProductID.Visible = false;
+         // 
+         // txtCategoryID
+         // 
+         this.txtCategoryID.Location = new System.Drawing.Point(326, 30);
+         this.txtCategoryID.Name = "txtCategoryID";
+         this.txtCategoryID.Size = new System.Drawing.Size(154, 20);
+         this.txtCategoryID.TabIndex = 17;
+         this.txtCategoryID.Visible = false;
+         // 
+         // cmbCategory
+         // 
+         this.cmbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+         this.cmbCategory.FormattingEnabled = true;
+         this.cmbCategory.Location = new System.Drawing.Point(126, 29);
+         this.cmbCategory.Name = "cmbCategory";
+         this.cmbCategory.Size = new System.Drawing.Size(154, 21);
+         this.cmbCategory.TabIndex = 16;
+         this.cmbCategory.SelectedIndexChanged += new System.EventHandler(this.cmbCategory_SelectedIndexChanged);
          // 
          // label6
          // 
@@ -161,13 +174,6 @@ namespace SemiAppsDev
          this.label2.TabIndex = 9;
          this.label2.Text = "Price";
          // 
-         // txtReorder
-         // 
-         this.txtReorder.Location = new System.Drawing.Point(126, 243);
-         this.txtReorder.Name = "txtReorder";
-         this.txtReorder.Size = new System.Drawing.Size(154, 20);
-         this.txtReorder.TabIndex = 8;
-         // 
          // txtStockonHand
          // 
          this.txtStockonHand.Location = new System.Drawing.Point(126, 152);
@@ -200,16 +206,17 @@ namespace SemiAppsDev
          // 
          // btnUpdate
          // 
-         this.btnUpdate.Location = new System.Drawing.Point(292, 278);
+         this.btnUpdate.Location = new System.Drawing.Point(276, 265);
          this.btnUpdate.Name = "btnUpdate";
          this.btnUpdate.Size = new System.Drawing.Size(75, 23);
          this.btnUpdate.TabIndex = 1;
          this.btnUpdate.Text = "Update";
          this.btnUpdate.UseVisualStyleBackColor = true;
+         this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
          // 
          // btnSave
          // 
-         this.btnSave.Location = new System.Drawing.Point(187, 278);
+         this.btnSave.Location = new System.Drawing.Point(171, 265);
          this.btnSave.Name = "btnSave";
          this.btnSave.Size = new System.Drawing.Size(75, 23);
          this.btnSave.TabIndex = 0;
@@ -245,7 +252,7 @@ namespace SemiAppsDev
          this.panel1.Controls.Add(this.btnRegister);
          this.panel1.Controls.Add(this.btnProduct);
          this.panel1.Controls.Add(this.btnDashboard);
-         this.panel1.Location = new System.Drawing.Point(8, 15);
+         this.panel1.Location = new System.Drawing.Point(13, 13);
          this.panel1.Name = "panel1";
          this.panel1.Size = new System.Drawing.Size(167, 402);
          this.panel1.TabIndex = 4;
@@ -310,32 +317,6 @@ namespace SemiAppsDev
          this.btnDashboard.UseVisualStyleBackColor = true;
          this.btnDashboard.Click += new System.EventHandler(this.btnDashboard_Click);
          // 
-         // cmbCategory
-         // 
-         this.cmbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-         this.cmbCategory.FormattingEnabled = true;
-         this.cmbCategory.Location = new System.Drawing.Point(126, 29);
-         this.cmbCategory.Name = "cmbCategory";
-         this.cmbCategory.Size = new System.Drawing.Size(154, 21);
-         this.cmbCategory.TabIndex = 16;
-         this.cmbCategory.SelectedIndexChanged += new System.EventHandler(this.cmbCategory_SelectedIndexChanged);
-         // 
-         // txtCategoryID
-         // 
-         this.txtCategoryID.Location = new System.Drawing.Point(326, 30);
-         this.txtCategoryID.Name = "txtCategoryID";
-         this.txtCategoryID.Size = new System.Drawing.Size(154, 20);
-         this.txtCategoryID.TabIndex = 17;
-         this.txtCategoryID.Visible = false;
-         // 
-         // txtProductID
-         // 
-         this.txtProductID.Location = new System.Drawing.Point(326, 60);
-         this.txtProductID.Name = "txtProductID";
-         this.txtProductID.Size = new System.Drawing.Size(154, 20);
-         this.txtProductID.TabIndex = 18;
-         this.txtProductID.Visible = false;
-         // 
          // Product
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -364,7 +345,6 @@ namespace SemiAppsDev
       private System.Windows.Forms.TabPage tabPage2;
       private System.Windows.Forms.Label label3;
       private System.Windows.Forms.Label label2;
-      private System.Windows.Forms.TextBox txtReorder;
       private System.Windows.Forms.TextBox txtStockonHand;
       private System.Windows.Forms.TextBox txtPrice;
       private System.Windows.Forms.TextBox txtProductname;
@@ -375,7 +355,6 @@ namespace SemiAppsDev
       private System.Windows.Forms.Label label5;
       private System.Windows.Forms.Label label4;
       private System.Windows.Forms.DateTimePicker dateTimePicker;
-      private System.Windows.Forms.Label label7;
       private System.Windows.Forms.Label label6;
       private System.Windows.Forms.Panel panel1;
       private System.Windows.Forms.Button btnInventory;

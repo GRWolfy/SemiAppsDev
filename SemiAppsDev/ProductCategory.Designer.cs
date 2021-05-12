@@ -31,6 +31,7 @@ namespace SemiAppsDev
       {
          this.tabControlCategory = new System.Windows.Forms.TabControl();
          this.tabPage1 = new System.Windows.Forms.TabPage();
+         this.txtId = new System.Windows.Forms.TextBox();
          this.label5 = new System.Windows.Forms.Label();
          this.txtProductCategory = new System.Windows.Forms.TextBox();
          this.label1 = new System.Windows.Forms.Label();
@@ -45,7 +46,6 @@ namespace SemiAppsDev
          this.btnRegister = new System.Windows.Forms.Button();
          this.Product = new System.Windows.Forms.Button();
          this.btnDashboard = new System.Windows.Forms.Button();
-         this.txtId = new System.Windows.Forms.TextBox();
          this.tabControlCategory.SuspendLayout();
          this.tabPage1.SuspendLayout();
          this.tabPageCategory.SuspendLayout();
@@ -78,6 +78,14 @@ namespace SemiAppsDev
          this.tabPage1.TabIndex = 0;
          this.tabPage1.Text = "Add | Update Product";
          this.tabPage1.UseVisualStyleBackColor = true;
+         // 
+         // txtId
+         // 
+         this.txtId.Location = new System.Drawing.Point(203, 122);
+         this.txtId.Name = "txtId";
+         this.txtId.Size = new System.Drawing.Size(154, 20);
+         this.txtId.TabIndex = 14;
+         this.txtId.Visible = false;
          // 
          // label5
          // 
@@ -151,7 +159,7 @@ namespace SemiAppsDev
          this.panel1.Controls.Add(this.btnRegister);
          this.panel1.Controls.Add(this.Product);
          this.panel1.Controls.Add(this.btnDashboard);
-         this.panel1.Location = new System.Drawing.Point(12, 23);
+         this.panel1.Location = new System.Drawing.Point(13, 13);
          this.panel1.Name = "panel1";
          this.panel1.Size = new System.Drawing.Size(167, 402);
          this.panel1.TabIndex = 4;
@@ -215,14 +223,6 @@ namespace SemiAppsDev
          this.btnDashboard.Text = "Dashboard";
          this.btnDashboard.UseVisualStyleBackColor = true;
          this.btnDashboard.Click += new System.EventHandler(this.btnDashboard_Click);
-         // 
-         // txtId
-         // 
-         this.txtId.Location = new System.Drawing.Point(203, 122);
-         this.txtId.Name = "txtId";
-         this.txtId.Size = new System.Drawing.Size(154, 20);
-         this.txtId.TabIndex = 14;
-         this.txtId.Visible = false;
          // 
          // ProductCategory
          // 

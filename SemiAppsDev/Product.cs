@@ -13,6 +13,8 @@ namespace SemiAppsDev
 {
    public partial class Product : Form
    {
+      private string collector = Login.setfirstname + " " + Login.setlastname;
+
       public Product()
       {
          InitializeComponent();
@@ -20,12 +22,10 @@ namespace SemiAppsDev
 
       private void btnSave_Click(object sender, EventArgs e)
       {
-         var collector = Login.setfirstname + " " + Login.setlastname;
-
          try
          {
             Connection.Connection.DB();
-            Functions.Function.gen = "INSERT INTO product(productcategoryid, productname, price, stockonhand, productdateencoded, productencodedby, reorderstock) VALUES('" + txtCategoryID.Text + "', '" + txtProductname.Text + "', '" + txtPrice.Text + "', '" + txtStockonHand.Text + "', '" + dateTimePicker.Value.Date + "', '" + collector + "', '"+ txtReorder.Text +"') ";
+            Functions.Function.gen = "INSERT INTO product(productcategoryid, productname, price, stockonhand, productdateencoded, productencodedby, reorderstock) VALUES('" + txtCategoryID.Text + "', '" + txtProductname.Text + "', '" + txtPrice.Text + "', '" + txtStockonHand.Text + "', '" + dateTimePicker.Value.Date + "', '" + collector + "', 0) ";
             Functions.Function.command = new SqlCommand(Functions.Function.gen, Connection.Connection.con);
             Functions.Function.command.ExecuteNonQuery();
             MessageBox.Show("Product saved", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -114,7 +114,8 @@ namespace SemiAppsDev
          try
          {
             Connection.Connection.DB();
-            Functions.Function.gen = "SELECT * FROM productcategory productcategoryname = '"+ cmbCategory.Text +"' ";
+            Functions.Function.gen = "SELECT * FROM productcategory WHERE productcategoryname = '"+ cmbCategory.Text +"' ";
+            Functions.Function.command = new SqlCommand(Functions.Function.gen, Connection.Connection.con);
             Functions.Function.reader = Functions.Function.command.ExecuteReader();
 
             if (Functions.Function.reader.Read())
@@ -133,7 +134,7 @@ namespace SemiAppsDev
       private void ViewProducts()
       {
          Connection.Connection.DB();
-         Functions.Function.gen = "SELECT productcategory.productcategoryid AS [CATEGORY ID], productcategory.productcategoryname AS [PRODUCT NAME], product.productid AS [PRODUCT ID], product.productname AS [PRODUCT NAME],product.price AS [PRICE], product.stockonhand AS [STOCK ON HAND], product.productdateencoded AS [DATE], product.productencodedby AS [ENCODED BY], product.reorderstock AS [REORDER STOCK] FROM productcategory INNER JOIN product ON productcategory.productcategoryid = product.productcategoryid";
+         Functions.Function.gen = "SELECT productcategory.productcategoryid AS [CATEGORY ID], productcategory.productcategoryname AS [PRODUCT NAME], product.productid AS [PRODUCT ID], product.productname AS [PRODUCT NAME],product.price AS [PRICE], product.stockonhand AS [STOCK ON HAND], product.productdateencoded AS [DATE], product.productencodedby AS [ENCODED BY] FROM productcategory INNER JOIN product ON productcategory.productcategoryid = product.productcategoryid";
          Functions.Function.fill(Functions.Function.gen, dataGridProduct);
       }
 
@@ -146,10 +147,29 @@ namespace SemiAppsDev
          txtPrice.Text = dataGridProduct.CurrentRow.Cells[4].Value.ToString();
          txtStockonHand.Text = dataGridProduct.CurrentRow.Cells[5].Value.ToString();
          dateTimePicker.Value = Convert.ToDateTime(dataGridProduct.Rows[e.RowIndex].Cells[6].Value.ToString());
-         txtReorder.Text = dataGridProduct.CurrentRow.Cells[8].Value.ToString();
          btnUpdate.Enabled = true;
          btnSave.Enabled = false;
          tabControlProduct.SelectedIndex = 0;
+      }
+
+      private void btnUpdate_Click(object sender, EventArgs e)
+      {
+         try
+         {
+            Connection.Connection.DB();
+            Functions.Function.gen = "UPDATE product SET productcategoryid = '" + txtCategoryID.Text + "', productname = '" + txtProductname.Text + "', price = '" + txtPrice.Text + "', stockonhand = '" + txtStockonHand.Text + "', productdateencoded = '" + dateTimePicker.Value.Date + "', productencodedby = '" + collector + "' WHERE productid = '" + txtProductID.Text + "' ";
+            Functions.Function.command = new SqlCommand(Functions.Function.gen, Connection.Connection.con);
+            Functions.Function.command.ExecuteNonQuery();
+            MessageBox.Show("Update success.", "Updated", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            ViewProducts();
+            tabControlProduct.SelectedIndex = 1;
+            Connection.Connection.con.Close();
+         }
+
+         catch (Exception ex)
+         {
+            MessageBox.Show(ex.Message);
+         }
       }
    }
 }

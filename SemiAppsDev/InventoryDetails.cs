@@ -58,5 +58,15 @@ namespace SemiAppsDev
          inventory.Show();
          Hide();
       }
+
+      private void InventoryDetails_Load(object sender, EventArgs e)
+      {
+         ViewInvetory();
+      }
+
+      private void ViewInvetory()
+      { 
+         
+      }
    }
 }
