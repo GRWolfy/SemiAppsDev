@@ -80,6 +80,7 @@ namespace SemiAppsDev
          this.Controls.Add(this.label1);
          this.Controls.Add(this.btnReorder);
          this.Controls.Add(this.label2);
+         this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
          this.Name = "Reorder";
          this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
          this.Text = "Reorder";

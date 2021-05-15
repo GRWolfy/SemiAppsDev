@@ -140,7 +140,8 @@ namespace SemiAppsDev
             if (Functions.Function.reader.HasRows)
             {
                Functions.Function.reader.Read();
-               lblTotalSales.Text = (Functions.Function.reader["total"].ToString());
+               string s = (Functions.Function.reader["total"].ToString());
+               lblTotalSales.Text = Decimal.Parse(s).ToString("N2");
             }
          }
 

@@ -34,145 +34,83 @@ namespace SemiAppsDev
          this.txtFirstname = new System.Windows.Forms.TextBox();
          this.l = new System.Windows.Forms.Label();
          this.btnRegisterSave = new System.Windows.Forms.Button();
-         this.panel1 = new System.Windows.Forms.Panel();
-         this.btnInventory = new System.Windows.Forms.Button();
-         this.btnCategory = new System.Windows.Forms.Button();
-         this.btnLogin = new System.Windows.Forms.Button();
-         this.button1 = new System.Windows.Forms.Button();
-         this.Product = new System.Windows.Forms.Button();
-         this.btnDashboard = new System.Windows.Forms.Button();
-         this.panel1.SuspendLayout();
+         this.btnBack = new System.Windows.Forms.Button();
          this.SuspendLayout();
          // 
          // label2
          // 
          this.label2.AutoSize = true;
-         this.label2.Location = new System.Drawing.Point(310, 245);
+         this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.label2.Location = new System.Drawing.Point(58, 192);
          this.label2.Name = "label2";
-         this.label2.Size = new System.Drawing.Size(56, 13);
+         this.label2.Size = new System.Drawing.Size(84, 20);
          this.label2.TabIndex = 8;
          this.label2.Text = "Last name";
          // 
          // txtLastname
          // 
-         this.txtLastname.Location = new System.Drawing.Point(400, 238);
+         this.txtLastname.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.txtLastname.Location = new System.Drawing.Point(148, 185);
          this.txtLastname.Name = "txtLastname";
-         this.txtLastname.Size = new System.Drawing.Size(100, 20);
+         this.txtLastname.Size = new System.Drawing.Size(100, 26);
          this.txtLastname.TabIndex = 7;
+         this.txtLastname.UseSystemPasswordChar = true;
          // 
          // txtFirstname
          // 
-         this.txtFirstname.Location = new System.Drawing.Point(400, 193);
+         this.txtFirstname.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.txtFirstname.Location = new System.Drawing.Point(148, 140);
          this.txtFirstname.Name = "txtFirstname";
-         this.txtFirstname.Size = new System.Drawing.Size(100, 20);
+         this.txtFirstname.Size = new System.Drawing.Size(100, 26);
          this.txtFirstname.TabIndex = 6;
          // 
          // l
          // 
          this.l.AutoSize = true;
-         this.l.Location = new System.Drawing.Point(301, 193);
+         this.l.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.l.Location = new System.Drawing.Point(49, 140);
          this.l.Name = "l";
-         this.l.Size = new System.Drawing.Size(55, 13);
+         this.l.Size = new System.Drawing.Size(84, 20);
          this.l.TabIndex = 5;
          this.l.Text = "First name";
          // 
          // btnRegisterSave
          // 
-         this.btnRegisterSave.Location = new System.Drawing.Point(435, 343);
+         this.btnRegisterSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.btnRegisterSave.Location = new System.Drawing.Point(148, 280);
          this.btnRegisterSave.Name = "btnRegisterSave";
-         this.btnRegisterSave.Size = new System.Drawing.Size(75, 23);
+         this.btnRegisterSave.Size = new System.Drawing.Size(82, 31);
          this.btnRegisterSave.TabIndex = 5;
          this.btnRegisterSave.Text = "Register";
          this.btnRegisterSave.UseVisualStyleBackColor = true;
          this.btnRegisterSave.Click += new System.EventHandler(this.btnRegisterSave_Click_1);
          // 
-         // panel1
+         // btnBack
          // 
-         this.panel1.Controls.Add(this.btnInventory);
-         this.panel1.Controls.Add(this.btnCategory);
-         this.panel1.Controls.Add(this.btnLogin);
-         this.panel1.Controls.Add(this.button1);
-         this.panel1.Controls.Add(this.Product);
-         this.panel1.Controls.Add(this.btnDashboard);
-         this.panel1.Location = new System.Drawing.Point(13, 13);
-         this.panel1.Name = "panel1";
-         this.panel1.Size = new System.Drawing.Size(167, 402);
-         this.panel1.TabIndex = 9;
-         // 
-         // btnInventory
-         // 
-         this.btnInventory.Location = new System.Drawing.Point(22, 337);
-         this.btnInventory.Name = "btnInventory";
-         this.btnInventory.Size = new System.Drawing.Size(117, 36);
-         this.btnInventory.TabIndex = 5;
-         this.btnInventory.Text = "Inventory Details";
-         this.btnInventory.UseVisualStyleBackColor = true;
-         this.btnInventory.Click += new System.EventHandler(this.btnInventory_Click);
-         // 
-         // btnCategory
-         // 
-         this.btnCategory.Location = new System.Drawing.Point(22, 253);
-         this.btnCategory.Name = "btnCategory";
-         this.btnCategory.Size = new System.Drawing.Size(117, 36);
-         this.btnCategory.TabIndex = 4;
-         this.btnCategory.Text = "Product Category";
-         this.btnCategory.UseVisualStyleBackColor = true;
-         this.btnCategory.Click += new System.EventHandler(this.btnCategory_Click);
-         // 
-         // btnLogin
-         // 
-         this.btnLogin.Location = new System.Drawing.Point(22, 211);
-         this.btnLogin.Name = "btnLogin";
-         this.btnLogin.Size = new System.Drawing.Size(117, 36);
-         this.btnLogin.TabIndex = 3;
-         this.btnLogin.Text = "Login";
-         this.btnLogin.UseVisualStyleBackColor = true;
-         this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
-         // 
-         // button1
-         // 
-         this.button1.Location = new System.Drawing.Point(22, 165);
-         this.button1.Name = "button1";
-         this.button1.Size = new System.Drawing.Size(117, 36);
-         this.button1.TabIndex = 2;
-         this.button1.Text = "Register";
-         this.button1.UseVisualStyleBackColor = true;
-         // 
-         // Product
-         // 
-         this.Product.Location = new System.Drawing.Point(22, 295);
-         this.Product.Name = "Product";
-         this.Product.Size = new System.Drawing.Size(117, 36);
-         this.Product.TabIndex = 1;
-         this.Product.Text = "Product";
-         this.Product.UseVisualStyleBackColor = true;
-         this.Product.Click += new System.EventHandler(this.Product_Click);
-         // 
-         // btnDashboard
-         // 
-         this.btnDashboard.Location = new System.Drawing.Point(22, 123);
-         this.btnDashboard.Name = "btnDashboard";
-         this.btnDashboard.Size = new System.Drawing.Size(117, 36);
-         this.btnDashboard.TabIndex = 0;
-         this.btnDashboard.Text = "Dashboard";
-         this.btnDashboard.UseVisualStyleBackColor = true;
-         this.btnDashboard.Click += new System.EventHandler(this.btnDashboard_Click);
+         this.btnBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.btnBack.Location = new System.Drawing.Point(12, 12);
+         this.btnBack.Name = "btnBack";
+         this.btnBack.Size = new System.Drawing.Size(75, 27);
+         this.btnBack.TabIndex = 9;
+         this.btnBack.Text = "Back";
+         this.btnBack.UseVisualStyleBackColor = true;
+         this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
          // 
          // Register
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-         this.ClientSize = new System.Drawing.Size(800, 450);
-         this.Controls.Add(this.panel1);
+         this.ClientSize = new System.Drawing.Size(334, 404);
+         this.Controls.Add(this.btnBack);
          this.Controls.Add(this.btnRegisterSave);
          this.Controls.Add(this.label2);
          this.Controls.Add(this.txtLastname);
          this.Controls.Add(this.txtFirstname);
          this.Controls.Add(this.l);
+         this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
          this.Name = "Register";
          this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
          this.Text = "Register";
-         this.panel1.ResumeLayout(false);
          this.ResumeLayout(false);
          this.PerformLayout();
 
@@ -185,13 +123,7 @@ namespace SemiAppsDev
       private System.Windows.Forms.TextBox txtFirstname;
       private System.Windows.Forms.Label l;
       private System.Windows.Forms.Button btnRegisterSave;
-      private System.Windows.Forms.Panel panel1;
-      private System.Windows.Forms.Button btnInventory;
-      private System.Windows.Forms.Button btnCategory;
-      private System.Windows.Forms.Button btnLogin;
-      private System.Windows.Forms.Button button1;
-      private System.Windows.Forms.Button Product;
-      private System.Windows.Forms.Button btnDashboard;
+      private System.Windows.Forms.Button btnBack;
    }
 }
 

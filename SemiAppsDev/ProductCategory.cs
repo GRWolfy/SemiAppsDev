@@ -29,6 +29,7 @@ namespace SemiAppsDev
             MessageBox.Show("Registration success.", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Connection.Connection.con.Close();
             ViewCategory();
+            tabControlCategory.SelectedIndex = 1;
          }
 
          catch (Exception ex)

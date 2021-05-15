@@ -32,8 +32,6 @@ namespace SemiAppsDev
          this.panel1 = new System.Windows.Forms.Panel();
          this.btnInventory = new System.Windows.Forms.Button();
          this.btnCategory = new System.Windows.Forms.Button();
-         this.btnLogin = new System.Windows.Forms.Button();
-         this.btnRegister = new System.Windows.Forms.Button();
          this.Product = new System.Windows.Forms.Button();
          this.btnDashboard = new System.Windows.Forms.Button();
          this.tabControlInvetory = new System.Windows.Forms.TabControl();
@@ -78,8 +76,6 @@ namespace SemiAppsDev
          // 
          this.panel1.Controls.Add(this.btnInventory);
          this.panel1.Controls.Add(this.btnCategory);
-         this.panel1.Controls.Add(this.btnLogin);
-         this.panel1.Controls.Add(this.btnRegister);
          this.panel1.Controls.Add(this.Product);
          this.panel1.Controls.Add(this.btnDashboard);
          this.panel1.Location = new System.Drawing.Point(13, 13);
@@ -89,7 +85,7 @@ namespace SemiAppsDev
          // 
          // btnInventory
          // 
-         this.btnInventory.Location = new System.Drawing.Point(22, 337);
+         this.btnInventory.Location = new System.Drawing.Point(22, 249);
          this.btnInventory.Name = "btnInventory";
          this.btnInventory.Size = new System.Drawing.Size(117, 36);
          this.btnInventory.TabIndex = 5;
@@ -99,7 +95,7 @@ namespace SemiAppsDev
          // 
          // btnCategory
          // 
-         this.btnCategory.Location = new System.Drawing.Point(22, 253);
+         this.btnCategory.Location = new System.Drawing.Point(22, 165);
          this.btnCategory.Name = "btnCategory";
          this.btnCategory.Size = new System.Drawing.Size(117, 36);
          this.btnCategory.TabIndex = 4;
@@ -107,29 +103,9 @@ namespace SemiAppsDev
          this.btnCategory.UseVisualStyleBackColor = true;
          this.btnCategory.Click += new System.EventHandler(this.btnCategory_Click);
          // 
-         // btnLogin
-         // 
-         this.btnLogin.Location = new System.Drawing.Point(22, 211);
-         this.btnLogin.Name = "btnLogin";
-         this.btnLogin.Size = new System.Drawing.Size(117, 36);
-         this.btnLogin.TabIndex = 3;
-         this.btnLogin.Text = "Login";
-         this.btnLogin.UseVisualStyleBackColor = true;
-         this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
-         // 
-         // btnRegister
-         // 
-         this.btnRegister.Location = new System.Drawing.Point(22, 165);
-         this.btnRegister.Name = "btnRegister";
-         this.btnRegister.Size = new System.Drawing.Size(117, 36);
-         this.btnRegister.TabIndex = 2;
-         this.btnRegister.Text = "Register";
-         this.btnRegister.UseVisualStyleBackColor = true;
-         this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
-         // 
          // Product
          // 
-         this.Product.Location = new System.Drawing.Point(22, 295);
+         this.Product.Location = new System.Drawing.Point(22, 207);
          this.Product.Name = "Product";
          this.Product.Size = new System.Drawing.Size(117, 36);
          this.Product.TabIndex = 1;
@@ -197,6 +173,7 @@ namespace SemiAppsDev
          // 
          // btnDelete
          // 
+         this.btnDelete.Enabled = false;
          this.btnDelete.Location = new System.Drawing.Point(389, 278);
          this.btnDelete.Name = "btnDelete";
          this.btnDelete.Size = new System.Drawing.Size(75, 23);
@@ -333,6 +310,7 @@ namespace SemiAppsDev
          // 
          // btnUpdate
          // 
+         this.btnUpdate.Enabled = false;
          this.btnUpdate.Location = new System.Drawing.Point(292, 278);
          this.btnUpdate.Name = "btnUpdate";
          this.btnUpdate.Size = new System.Drawing.Size(75, 23);
@@ -342,6 +320,7 @@ namespace SemiAppsDev
          // 
          // btnSave
          // 
+         this.btnSave.Enabled = false;
          this.btnSave.Location = new System.Drawing.Point(187, 278);
          this.btnSave.Name = "btnSave";
          this.btnSave.Size = new System.Drawing.Size(75, 23);
@@ -386,7 +365,7 @@ namespace SemiAppsDev
          this.dataGridProduct.Name = "dataGridProduct";
          this.dataGridProduct.Size = new System.Drawing.Size(537, 282);
          this.dataGridProduct.TabIndex = 0;
-         this.dataGridProduct.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridProduct_CellMouseClick);
+         this.dataGridProduct.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridProduct_CellMouseClick);
          // 
          // tabPage3
          // 
@@ -423,6 +402,7 @@ namespace SemiAppsDev
          this.dataGridInventory.Name = "dataGridInventory";
          this.dataGridInventory.Size = new System.Drawing.Size(537, 282);
          this.dataGridInventory.TabIndex = 16;
+         this.dataGridInventory.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridInventory_CellMouseClick);
          // 
          // InventoryDetails
          // 
@@ -431,6 +411,7 @@ namespace SemiAppsDev
          this.ClientSize = new System.Drawing.Size(800, 450);
          this.Controls.Add(this.tabControlInvetory);
          this.Controls.Add(this.panel1);
+         this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
          this.Name = "InventoryDetails";
          this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
          this.Text = "InventoryDetails";
@@ -454,8 +435,6 @@ namespace SemiAppsDev
       private System.Windows.Forms.Panel panel1;
       private System.Windows.Forms.Button btnInventory;
       private System.Windows.Forms.Button btnCategory;
-      private System.Windows.Forms.Button btnLogin;
-      private System.Windows.Forms.Button btnRegister;
       private System.Windows.Forms.Button Product;
       private System.Windows.Forms.Button btnDashboard;
       private System.Windows.Forms.TabControl tabControlInvetory;

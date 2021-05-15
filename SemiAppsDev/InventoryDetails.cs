@@ -73,7 +73,7 @@ namespace SemiAppsDev
       private void ViewProduct()
       {
          Connection.Connection.DB();
-         Functions.Function.gen = "SELECT productcategory.productcategoryid AS [CATEGORY ID], productcategory.productcategoryname AS [PRODUCT NAME], product.productid AS [PRODUCT ID], product.productname AS [PRODUCT NAME], product.price AS [PRICE], product.stockonhand AS [STOCK ON HAND], product.productdateencoded AS [DATE], product.productencodedby AS [ENCODED BY] FROM productcategory INNER JOIN product ON productcategory.productcategoryid = product.productcategoryid WHERE NOT EXISTS (SELECT * FROM inventorydetails WHERE product.productid = inventorydetails.productid);";
+         Functions.Function.gen = "SELECT productcategory.productcategoryid AS [CATEGORY ID], productcategory.productcategoryname AS [PRODUCT NAME], product.productid AS [PRODUCT ID], product.productname AS [PRODUCT NAME], product.price AS [PRICE], product.stockonhand AS [STOCK ON HAND], product.productdateencoded AS [DATE], product.productencodedby AS [ENCODED BY] FROM productcategory INNER JOIN product ON productcategory.productcategoryid = product.productcategoryid ";
          Functions.Function.fill(Functions.Function.gen, dataGridProduct);
       }
 
@@ -96,6 +96,7 @@ namespace SemiAppsDev
             Functions.Function.command = new SqlCommand(Functions.Function.gen, Connection.Connection.con);
             Functions.Function.command.ExecuteNonQuery();
             MessageBox.Show("Saved", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            ViewInventoryDetails();
             tabControlInvetory.SelectedIndex = 1;
             Connection.Connection.con.Close();
 
@@ -107,7 +108,7 @@ namespace SemiAppsDev
          }
       }
 
-      private void dataGridProduct_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+      private void DataGridProduct_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
       {
          txtCategoryID.Text = dataGridProduct.CurrentRow.Cells[0].Value.ToString();
          cmbCategory.Text = dataGridProduct.CurrentRow.Cells[1].Value.ToString();
@@ -116,8 +117,9 @@ namespace SemiAppsDev
          txtPrice.Text = dataGridProduct.CurrentRow.Cells[4].Value.ToString();
          txtStockonHand.Text = dataGridProduct.CurrentRow.Cells[5].Value.ToString();
          dateTimePicker.Value = Convert.ToDateTime(dataGridProduct.Rows[e.RowIndex].Cells[6].Value.ToString());
+         btnSave.Enabled = true;
          btnUpdate.Enabled = true;
-         //btnSave.Enabled = false;
+         btnDelete.Enabled = true;
          tabControlInvetory.SelectedIndex = 0;
          StockChecker(Convert.ToInt32(txtStockonHand.Text), Convert.ToInt32(txtProductID.Text));
       }
@@ -158,6 +160,13 @@ namespace SemiAppsDev
          {
             MessageBox.Show(ex.Message);
          }
+      }
+
+      private void dataGridInventory_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+      {
+         btnSave.Enabled = false;
+         btnUpdate.Enabled = true;
+         btnDelete.Enabled = true;
       }
    }
 }

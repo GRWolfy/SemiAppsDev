@@ -25,7 +25,7 @@ namespace SemiAppsDev
          try
          {
             Connection.Connection.DB();
-            Functions.Function.gen = "UPDATE product SET stockonhand = '" + newStock + "' WHERE productid = '" + InventoryDetails.setproductid + "' ";
+            Functions.Function.gen = "UPDATE product SET stockonhand = '" + newStock + "' WHERE productid = '" + InventoryDetails.setproductid + "' ; UPDATE product SET reorderstock = '"+ txtReorder.Text +"' WHERE productid = '"+ InventoryDetails.setproductid + "' ";
             Functions.Function.command = new SqlCommand(Functions.Function.gen, Connection.Connection.con);
             Functions.Function.command.ExecuteNonQuery();
             MessageBox.Show("Saved.", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
