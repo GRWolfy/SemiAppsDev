@@ -66,15 +66,7 @@ namespace SemiAppsDev
 
       private void InventoryDetails_Load(object sender, EventArgs e)
       {
-         ViewProduct();
          ViewInventoryDetails();
-      }
-
-      private void ViewProduct()
-      {
-         Connection.Connection.DB();
-         Functions.Function.gen = "SELECT productcategory.productcategoryid AS [CATEGORY ID], productcategory.productcategoryname AS [PRODUCT NAME], product.productid AS [PRODUCT ID], product.productname AS [PRODUCT NAME], product.price AS [PRICE], product.stockonhand AS [STOCK ON HAND], product.productdateencoded AS [DATE], product.productencodedby AS [ENCODED BY] FROM productcategory INNER JOIN product ON productcategory.productcategoryid = product.productcategoryid ";
-         Functions.Function.fill(Functions.Function.gen, dataGridProduct);
       }
 
       private void ViewInventoryDetails()
@@ -84,75 +76,56 @@ namespace SemiAppsDev
          Functions.Function.fill(Functions.Function.gen, dataGridInventory);
       }
 
-      private void btnSave_Click(object sender, EventArgs e)
-      {
-         int totalsales = Convert.ToInt32(txtPrice.Text) * Convert.ToInt32(txtStockout.Text);
-         int stockonhand = Convert.ToInt32(txtStockonHand.Text) - Convert.ToInt32(txtStockout.Text);
-
-         try
-         {
-            Connection.Connection.DB();
-            Functions.Function.gen = "INSERT INTO inventorydetails(productid, stockout, totalsales, inventorydate, inventoryencodedby) VALUES('" + txtProductID.Text + "', '" + txtStockout.Text + "', '"+ totalsales +"', '" + DateTime.Now.ToString("dd-MM-yyyy") + "', '"+ name + "'); UPDATE product SET stockonhand = '" + stockonhand + "' WHERE productid = '" + txtProductID.Text + "' ";
-            Functions.Function.command = new SqlCommand(Functions.Function.gen, Connection.Connection.con);
-            Functions.Function.command.ExecuteNonQuery();
-            MessageBox.Show("Saved", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            ViewInventoryDetails();
-            tabControlInvetory.SelectedIndex = 1;
-            Connection.Connection.con.Close();
-
-         }
-
-         catch (Exception ex)
-         {
-            MessageBox.Show(ex.Message);
-         }
-      }
-
-      private void DataGridProduct_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-      {
-         txtCategoryID.Text = dataGridProduct.CurrentRow.Cells[0].Value.ToString();
-         cmbCategory.Text = dataGridProduct.CurrentRow.Cells[1].Value.ToString();
-         txtProductID.Text = dataGridProduct.CurrentRow.Cells[2].Value.ToString();
-         txtProductname.Text = dataGridProduct.CurrentRow.Cells[3].Value.ToString();
-         txtPrice.Text = dataGridProduct.CurrentRow.Cells[4].Value.ToString();
-         txtStockonHand.Text = dataGridProduct.CurrentRow.Cells[5].Value.ToString();
-         dateTimePicker.Value = Convert.ToDateTime(dataGridProduct.Rows[e.RowIndex].Cells[6].Value.ToString());
-         btnSave.Enabled = true;
-         btnUpdate.Enabled = true;
-         btnDelete.Enabled = true;
-         tabControlInvetory.SelectedIndex = 0;
-         StockChecker(Convert.ToInt32(txtStockonHand.Text), Convert.ToInt32(txtProductID.Text));
-      }
-
       private void StockChecker(int stock, int productid)
       {
          if (stock <= 100)
          {
             setproductid = productid;
             setstockonhand = stock;
-            txtStockout.Enabled = false;
-            MessageBox.Show("Stocks are available for  Restock! Stock-outs are no longer permitted.", "ALERT!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            var reorder = new Reorder();
-            reorder.Show();
-            Hide();
+            //txtStockout.Enabled = false;
+            var msg = MessageBox.Show("Stocks are available for  Restock! Stock-outs are no longer permitted.", "ALERT!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (msg == DialogResult.Yes)
+            {
+               var reorder = new Reorder();
+               reorder.Show();
+               Hide();
+            }
          }
       }
 
-      private void btnDelete_Click(object sender, EventArgs e)
+      private void dataGridInventory_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
       {
+         int productid = 0;
+         string sproductid = "";
+         string categoryid = "";
+
+         var product = new Product();
+         product.txtInventoryId.Text = dataGridInventory[0, e.RowIndex].Value.ToString();
+         product.txtProductname.Text = dataGridInventory[1, e.RowIndex].Value.ToString();  
+         product.txtPrice.Text = dataGridInventory[2, e.RowIndex].Value.ToString();
+         product.txtStockonHand.Text = dataGridInventory[3, e.RowIndex].Value.ToString();
+         product.txtProductID.Text = sproductid;
+         product.txtCategoryID.Text = categoryid;
+         product.cmbCategory.Text = dataGridInventory[4, e.RowIndex].Value.ToString();
+         product.dateTimePicker.Value = Convert.ToDateTime(dataGridInventory[8, e.RowIndex].Value.ToString());
+         product.txtEncoder.Text = dataGridInventory[9, e.RowIndex].Value.ToString();
+
+         product.txtStockonHand.Enabled = false;
+
          try
          {
             Connection.Connection.DB();
-            var gen = MessageBox.Show("Are you sure you want to delete this record?", "Delete record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            Functions.Function.gen = "SELECT productid, productcategoryid FROM product WHERE productname = '" + product.txtProductname.Text + "' ";
+            Functions.Function.command = new SqlCommand(Functions.Function.gen, Connection.Connection.con);
+            Functions.Function.reader = Functions.Function.command.ExecuteReader();
 
-            if (gen == DialogResult.Yes)
+            if (Functions.Function.reader.HasRows)
             {
-               Functions.Function.gen = "DELETE FROM inventorydetails WHERE inventoryid = '" + txtInvetoryID.Text + "' ";
-               Functions.Function.command = new SqlCommand(Functions.Function.gen, Connection.Connection.con);
-               Functions.Function.command.ExecuteNonQuery();
-               Connection.Connection.con.Close();
-               InventoryDetails_Load(sender, e);
-               tabControlInvetory.SelectedIndex = 1;
+               Functions.Function.reader.Read();
+               productid = Convert.ToInt32(Functions.Function.reader["productid"].ToString());
+               sproductid = Functions.Function.reader["productid"].ToString();
+               categoryid = Functions.Function.reader["productcategoryid"].ToString();
             }
          }
 
@@ -160,13 +133,24 @@ namespace SemiAppsDev
          {
             MessageBox.Show(ex.Message);
          }
+
+         StockChecker(Convert.ToInt32(product.txtStockonHand.Text), productid);
+         product.Show();
+         Hide();
       }
 
-      private void dataGridInventory_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+      private void textBox1_TextChanged(object sender, EventArgs e)
       {
-         btnSave.Enabled = false;
-         btnUpdate.Enabled = true;
-         btnDelete.Enabled = true;
+         try
+         {
+            Functions.Function.gen = "SELECT * FROM product WHERE productname LIKE '" + txtSearch.Text + "%' OR productdateencoded LIKE '" + txtSearch.Text + "%' OR productid LIKE '" + txtSearch.Text + "%' OR productcategoryid LIKE '" + txtSearch.Text + "%' OR productencodedby LIKE '" + txtSearch.Text + "%' ";
+            Functions.Function.fill(Functions.Function.gen, dataGridInventory);
+         }
+
+         catch (Exception ex)
+         {
+            MessageBox.Show(ex.Message);
+         }
       }
    }
 }

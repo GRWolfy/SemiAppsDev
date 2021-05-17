@@ -213,9 +213,9 @@ namespace SemiAppsDev
          this.panel2.Controls.Add(this.label5);
          this.panel2.Controls.Add(this.lblStockonHand);
          this.panel2.Controls.Add(this.label4);
-         this.panel2.Location = new System.Drawing.Point(200, 12);
+         this.panel2.Location = new System.Drawing.Point(148, 12);
          this.panel2.Name = "panel2";
-         this.panel2.Size = new System.Drawing.Size(581, 100);
+         this.panel2.Size = new System.Drawing.Size(649, 100);
          this.panel2.TabIndex = 14;
          // 
          // Dashboard

@@ -98,6 +98,7 @@ namespace SemiAppsDev
          txtId.Text = dataGridCategory[0, e.RowIndex].Value.ToString();
          txtProductCategory.Text = dataGridCategory[1, e.RowIndex].Value.ToString();
          btnSave.Enabled = false;
+         btnUpdate.Enabled = true;
          tabControlCategory.SelectedIndex = 0;
       }
 

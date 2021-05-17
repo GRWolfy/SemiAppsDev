@@ -25,13 +25,11 @@ namespace SemiAppsDev
          try
          {
             Connection.Connection.DB();
-            Functions.Function.gen = "INSERT INTO product(productcategoryid, productname, price, stockonhand, productdateencoded, productencodedby, reorderstock) VALUES('" + txtCategoryID.Text + "', '" + txtProductname.Text + "', '" + txtPrice.Text + "', '" + txtStockonHand.Text + "', '" + dateTimePicker.Value.Date.ToString("yyyy-MM-dd") + "', '" + collector + "', 0) ";
+            Functions.Function.gen = "INSERT INTO product(productcategoryid, productname, price, stockonhand, productdateencoded, productencodedby, reorderstock) VALUES('" + txtCategoryID.Text + "', '" + txtProductname.Text + "', '" + txtPrice.Text + "', '" + txtStockonHand.Text + "', '" + dateTimePicker.Value.Date.ToString("yyyy-MM-dd") + "', '" + txtEncoder.Text + "', 0);  INSERT INTO inventorydetails(productid, stockout, totalsales, inventorydate, inventoryencodedby) VALUES((SELECT productid FROM product WHERE productname = '"+ txtProductname.Text +"'), 0, 0, '"+ dateTimePicker.Value.Date.ToString("yyyy-MM-dd") + "', '"+ txtEncoder.Text +"') ";
             Functions.Function.command = new SqlCommand(Functions.Function.gen, Connection.Connection.con);
             Functions.Function.command.ExecuteNonQuery();
             MessageBox.Show("Product saved", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Connection.Connection.con.Close();
-            ViewProducts();
-            tabControlProduct.SelectedIndex = 1;
          }
 
          catch (Exception ex)
@@ -84,9 +82,8 @@ namespace SemiAppsDev
 
       private void Product_Load(object sender, EventArgs e)
       {
-         btnUpdate.Enabled = false;
          setComboBox();
-         ViewProducts();
+         txtEncoder.Text = collector;
       }
 
       private void setComboBox()
@@ -133,27 +130,6 @@ namespace SemiAppsDev
          }
       }
 
-      private void ViewProducts()
-      {
-         Connection.Connection.DB();
-         Functions.Function.gen = "SELECT productcategory.productcategoryid AS [CATEGORY ID], productcategory.productcategoryname AS [PRODUCT NAME], product.productid AS [PRODUCT ID], product.productname AS [PRODUCT NAME],product.price AS [PRICE], product.stockonhand AS [STOCK ON HAND], product.productdateencoded AS [DATE], product.productencodedby AS [ENCODED BY] FROM productcategory INNER JOIN product ON productcategory.productcategoryid = product.productcategoryid";
-         Functions.Function.fill(Functions.Function.gen, dataGridProduct);
-      }
-
-      private void dataGridProduct_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-      {
-         txtCategoryID.Text = dataGridProduct.CurrentRow.Cells[0].Value.ToString();
-         cmbCategory.Text = dataGridProduct.CurrentRow.Cells[1].Value.ToString();
-         txtProductID.Text = dataGridProduct.CurrentRow.Cells[2].Value.ToString();
-         txtProductname.Text = dataGridProduct.CurrentRow.Cells[3].Value.ToString();
-         txtPrice.Text = dataGridProduct.CurrentRow.Cells[4].Value.ToString();
-         txtStockonHand.Text = dataGridProduct.CurrentRow.Cells[5].Value.ToString();
-         dateTimePicker.Value = Convert.ToDateTime(dataGridProduct.Rows[e.RowIndex].Cells[6].Value.ToString());
-         btnUpdate.Enabled = true;
-         btnSave.Enabled = false;
-         tabControlProduct.SelectedIndex = 0;
-      }
-
       private void btnUpdate_Click(object sender, EventArgs e)
       {
          try
@@ -163,8 +139,6 @@ namespace SemiAppsDev
             Functions.Function.command = new SqlCommand(Functions.Function.gen, Connection.Connection.con);
             Functions.Function.command.ExecuteNonQuery();
             MessageBox.Show("Update success.", "Updated", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            ViewProducts();
-            tabControlProduct.SelectedIndex = 1;
             Connection.Connection.con.Close();
          }
 
