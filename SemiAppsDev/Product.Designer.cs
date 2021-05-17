@@ -53,6 +53,8 @@ namespace SemiAppsDev
          this.btnCategory = new System.Windows.Forms.Button();
          this.btnProduct = new System.Windows.Forms.Button();
          this.btnDashboard = new System.Windows.Forms.Button();
+         this.label7 = new System.Windows.Forms.Label();
+         this.txtClerkname = new System.Windows.Forms.TextBox();
          this.tabControlProduct.SuspendLayout();
          this.tabPage1.SuspendLayout();
          this.tabPage2.SuspendLayout();
@@ -72,6 +74,8 @@ namespace SemiAppsDev
          // 
          // tabPage1
          // 
+         this.tabPage1.Controls.Add(this.label7);
+         this.tabPage1.Controls.Add(this.txtClerkname);
          this.tabPage1.Controls.Add(this.txtProductID);
          this.tabPage1.Controls.Add(this.txtCategoryID);
          this.tabPage1.Controls.Add(this.cmbCategory);
@@ -203,7 +207,7 @@ namespace SemiAppsDev
          // 
          // btnUpdate
          // 
-         this.btnUpdate.Location = new System.Drawing.Point(276, 265);
+         this.btnUpdate.Location = new System.Drawing.Point(416, 269);
          this.btnUpdate.Name = "btnUpdate";
          this.btnUpdate.Size = new System.Drawing.Size(75, 23);
          this.btnUpdate.TabIndex = 1;
@@ -213,7 +217,7 @@ namespace SemiAppsDev
          // 
          // btnSave
          // 
-         this.btnSave.Location = new System.Drawing.Point(171, 265);
+         this.btnSave.Location = new System.Drawing.Point(311, 269);
          this.btnSave.Name = "btnSave";
          this.btnSave.Size = new System.Drawing.Size(75, 23);
          this.btnSave.TabIndex = 0;
@@ -292,6 +296,22 @@ namespace SemiAppsDev
          this.btnDashboard.UseVisualStyleBackColor = true;
          this.btnDashboard.Click += new System.EventHandler(this.btnDashboard_Click);
          // 
+         // label7
+         // 
+         this.label7.AutoSize = true;
+         this.label7.Location = new System.Drawing.Point(51, 245);
+         this.label7.Name = "label7";
+         this.label7.Size = new System.Drawing.Size(60, 13);
+         this.label7.TabIndex = 20;
+         this.label7.Text = "Clerk name";
+         // 
+         // txtClerkname
+         // 
+         this.txtClerkname.Location = new System.Drawing.Point(126, 242);
+         this.txtClerkname.Name = "txtClerkname";
+         this.txtClerkname.Size = new System.Drawing.Size(154, 20);
+         this.txtClerkname.TabIndex = 19;
+         // 
          // Product
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -340,5 +360,7 @@ namespace SemiAppsDev
       private System.Windows.Forms.ComboBox cmbCategory;
       private System.Windows.Forms.TextBox txtCategoryID;
       private System.Windows.Forms.TextBox txtProductID;
+      private System.Windows.Forms.Label label7;
+      private System.Windows.Forms.TextBox txtClerkname;
    }
 }

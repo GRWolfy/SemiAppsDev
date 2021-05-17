@@ -29,6 +29,8 @@ namespace SemiAppsDev
             MessageBox.Show("Registration success.", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Connection.Connection.con.Close();
             ViewCategory();
+            txtId.Clear();
+            txtProductCategory.Clear();
             tabControlCategory.SelectedIndex = 1;
          }
 
@@ -111,6 +113,8 @@ namespace SemiAppsDev
             Functions.Function.command.ExecuteNonQuery();
             MessageBox.Show("Update success.", "Updated", MessageBoxButtons.OK, MessageBoxIcon.Information);
             ViewCategory();
+            txtId.Clear();
+            txtProductCategory.Clear();
             tabControlCategory.SelectedIndex = 1;
             Connection.Connection.con.Close();
          }

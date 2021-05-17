@@ -25,13 +25,14 @@ namespace SemiAppsDev
          try
          {
             Connection.Connection.DB();
-            Functions.Function.gen = "INSERT INTO product(productcategoryid, productname, price, stockonhand, productdateencoded, productencodedby, reorderstock) VALUES('" + txtCategoryID.Text + "', '" + txtProductname.Text + "', '" + txtPrice.Text + "', '" + txtStockonHand.Text + "', '" + dateTimePicker.Value.Date.ToString("yyyy-MM-dd") + "', '" + collector + "', 0) ";
+            Functions.Function.gen = "INSERT INTO product(productcategoryid, productname, price, stockonhand, productdateencoded, productencodedby, reorderstock) VALUES('" + txtCategoryID.Text + "', '" + txtProductname.Text + "', '" + txtPrice.Text + "', '" + txtStockonHand.Text + "', '" + dateTimePicker.Value.Date.ToString("yyyy-MM-dd") + "', '" + txtClerkname.Text + "', 0); INSERT INTO inventorydetails(productid, stockout, totalsales, inventorydate, inventoryencodedby) VALUES((SELECT productid FROM product WHERE productname = '" + txtProductname.Text + "'), 0, 0, '" + dateTimePicker.Value.Date.ToString("yyyy-MM-dd") + "', '" + txtClerkname.Text + "') ";
             Functions.Function.command = new SqlCommand(Functions.Function.gen, Connection.Connection.con);
             Functions.Function.command.ExecuteNonQuery();
             MessageBox.Show("Product saved", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Connection.Connection.con.Close();
             ViewProducts();
-            tabControlProduct.SelectedIndex = 1;
+            Clear();
+            tabControlProduct.SelectedIndex = 2;
          }
 
          catch (Exception ex)
@@ -87,6 +88,7 @@ namespace SemiAppsDev
          btnUpdate.Enabled = false;
          setComboBox();
          ViewProducts();
+         txtClerkname.Text = collector;
       }
 
       private void setComboBox()
@@ -152,6 +154,7 @@ namespace SemiAppsDev
          btnUpdate.Enabled = true;
          btnSave.Enabled = false;
          tabControlProduct.SelectedIndex = 0;
+         txtClerkname.Text = collector;
       }
 
       private void btnUpdate_Click(object sender, EventArgs e)
@@ -159,12 +162,13 @@ namespace SemiAppsDev
          try
          {
             Connection.Connection.DB();
-            Functions.Function.gen = "UPDATE product SET productcategoryid = '" + txtCategoryID.Text + "', productname = '" + txtProductname.Text + "', price = '" + txtPrice.Text + "', stockonhand = '" + txtStockonHand.Text + "', productdateencoded = '" + dateTimePicker.Value.Date + "', productencodedby = '" + collector + "' WHERE productid = '" + txtProductID.Text + "' ";
+            Functions.Function.gen = "UPDATE product SET productcategoryid = '" + txtCategoryID.Text + "', productname = '" + txtProductname.Text + "', price = '" + txtPrice.Text + "', stockonhand = '" + txtStockonHand.Text + "', productdateencoded = '" + dateTimePicker.Value.Date + "', productencodedby = '" + txtClerkname.Text + "' WHERE productid = '" + txtProductID.Text + "' ";
             Functions.Function.command = new SqlCommand(Functions.Function.gen, Connection.Connection.con);
             Functions.Function.command.ExecuteNonQuery();
             MessageBox.Show("Update success.", "Updated", MessageBoxButtons.OK, MessageBoxIcon.Information);
             ViewProducts();
-            tabControlProduct.SelectedIndex = 1;
+            Clear();
+            tabControlProduct.SelectedIndex = 2;
             Connection.Connection.con.Close();
          }
 
@@ -172,6 +176,16 @@ namespace SemiAppsDev
          {
             MessageBox.Show(ex.Message);
          }
+      }
+
+      private void Clear()
+      {
+         txtCategoryID.Clear();
+         txtClerkname.Clear();
+         txtPrice.Clear();
+         txtProductID.Clear();
+         txtProductname.Clear();
+         txtStockonHand.Clear();
       }
    }
 }

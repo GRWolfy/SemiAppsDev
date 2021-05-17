@@ -13,6 +13,8 @@ namespace SemiAppsDev
 {
    public partial class Dashboard : Form
    {
+      int categoryid = 0;   
+
       public Dashboard()
       {
          InitializeComponent();
@@ -110,7 +112,7 @@ namespace SemiAppsDev
          try
          {
             Connection.Connection.DB();
-            Functions.Function.gen = "SELECT SUM(stockout) AS total FROM inventorydetails";
+            Functions.Function.gen = "SELECT SUM(stockout) AS total FROM inventorydetails INNER JOIN product ON product.productid = inventorydetails.productid WHERE product.productcategoryid = '"+ txtCategoryID.Text +"'  ";
             Functions.Function.command = new SqlCommand(Functions.Function.gen, Connection.Connection.con);
             Functions.Function.reader = Functions.Function.command.ExecuteReader();
 
@@ -133,7 +135,7 @@ namespace SemiAppsDev
          try
          {
             Connection.Connection.DB();
-            Functions.Function.gen = "SELECT SUM(totalsales) AS total FROM inventorydetails";
+            Functions.Function.gen = "SELECT SUM(totalsales) AS [total] FROM inventorydetails INNER JOIN product ON product.productid = inventorydetails.productid WHERE product.productcategoryid = '"+ txtCategoryID.Text +"' ";
             Functions.Function.command = new SqlCommand(Functions.Function.gen, Connection.Connection.con);
             Functions.Function.reader = Functions.Function.command.ExecuteReader();
 
@@ -157,7 +159,7 @@ namespace SemiAppsDev
          try
          {
             Connection.Connection.DB();
-            Functions.Function.gen = "SELECT SUM(stockonhand) AS total FROM product";
+            Functions.Function.gen = "SELECT SUM(stockonhand) AS [total] FROM product WHERE productcategoryid = '"+ txtCategoryID.Text +"' ";
             Functions.Function.command = new SqlCommand(Functions.Function.gen, Connection.Connection.con);
             Functions.Function.reader = Functions.Function.command.ExecuteReader();
 
@@ -180,7 +182,7 @@ namespace SemiAppsDev
          try
          {
             Connection.Connection.DB();
-            Functions.Function.gen = "SELECT COUNT(*) AS total FROM product";
+            Functions.Function.gen = "SELECT COUNT(*) AS [total] FROM product INNER JOIN productcategory ON product.productcategoryid = productcategory.productcategoryid WHERE product.productcategoryid = '"+ txtCategoryID.Text +"' ";
             Functions.Function.command = new SqlCommand(Functions.Function.gen, Connection.Connection.con);
             Functions.Function.reader = Functions.Function.command.ExecuteReader();
 
@@ -210,7 +212,12 @@ namespace SemiAppsDev
             if (Functions.Function.reader.Read())
             {
                txtCategoryID.Text = Functions.Function.reader[0].ToString();
+               categoryid = Convert.ToInt32(Functions.Function.reader[0].ToString());
                viewByCategory();
+               displayTotalProduct();
+               displayStockonHand();
+               displayTotalSales();
+               displayStockout();
                Functions.Function.reader.Close();
             }
          }

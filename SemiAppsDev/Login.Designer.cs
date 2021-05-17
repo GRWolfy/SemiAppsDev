@@ -43,9 +43,9 @@ namespace SemiAppsDev
          this.l.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.l.Location = new System.Drawing.Point(45, 113);
          this.l.Name = "l";
-         this.l.Size = new System.Drawing.Size(80, 20);
+         this.l.Size = new System.Drawing.Size(83, 20);
          this.l.TabIndex = 0;
-         this.l.Text = "Firstname";
+         this.l.Text = "Username";
          // 
          // btnLoginSave
          // 
@@ -81,9 +81,9 @@ namespace SemiAppsDev
          this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.label2.Location = new System.Drawing.Point(54, 165);
          this.label2.Name = "label2";
-         this.label2.Size = new System.Drawing.Size(80, 20);
+         this.label2.Size = new System.Drawing.Size(78, 20);
          this.label2.TabIndex = 4;
-         this.label2.Text = "Lastname";
+         this.label2.Text = "Password";
          // 
          // linkLabel1
          // 

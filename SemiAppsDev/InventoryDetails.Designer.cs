@@ -36,6 +36,7 @@ namespace SemiAppsDev
          this.btnDashboard = new System.Windows.Forms.Button();
          this.tabControlInvetory = new System.Windows.Forms.TabControl();
          this.tabPage1 = new System.Windows.Forms.TabPage();
+         this.btnReorder = new System.Windows.Forms.Button();
          this.txtInvetoryID = new System.Windows.Forms.TextBox();
          this.btnDelete = new System.Windows.Forms.Button();
          this.txtProductID = new System.Windows.Forms.TextBox();
@@ -44,8 +45,6 @@ namespace SemiAppsDev
          this.label7 = new System.Windows.Forms.Label();
          this.label6 = new System.Windows.Forms.Label();
          this.label5 = new System.Windows.Forms.Label();
-         this.label4 = new System.Windows.Forms.Label();
-         this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
          this.label3 = new System.Windows.Forms.Label();
          this.label2 = new System.Windows.Forms.Label();
          this.txtStockout = new System.Windows.Forms.TextBox();
@@ -53,7 +52,6 @@ namespace SemiAppsDev
          this.txtPrice = new System.Windows.Forms.TextBox();
          this.txtProductname = new System.Windows.Forms.TextBox();
          this.label1 = new System.Windows.Forms.Label();
-         this.btnUpdate = new System.Windows.Forms.Button();
          this.btnSave = new System.Windows.Forms.Button();
          this.tabPage2 = new System.Windows.Forms.TabPage();
          this.label8 = new System.Windows.Forms.Label();
@@ -61,8 +59,9 @@ namespace SemiAppsDev
          this.dataGridProduct = new System.Windows.Forms.DataGridView();
          this.tabPage3 = new System.Windows.Forms.TabPage();
          this.label9 = new System.Windows.Forms.Label();
-         this.textBox1 = new System.Windows.Forms.TextBox();
+         this.txtSearch2 = new System.Windows.Forms.TextBox();
          this.dataGridInventory = new System.Windows.Forms.DataGridView();
+         this.btnUpdate = new System.Windows.Forms.Button();
          this.panel1.SuspendLayout();
          this.tabControlInvetory.SuspendLayout();
          this.tabPage1.SuspendLayout();
@@ -136,6 +135,7 @@ namespace SemiAppsDev
          // 
          // tabPage1
          // 
+         this.tabPage1.Controls.Add(this.btnReorder);
          this.tabPage1.Controls.Add(this.txtInvetoryID);
          this.tabPage1.Controls.Add(this.btnDelete);
          this.tabPage1.Controls.Add(this.txtProductID);
@@ -144,8 +144,6 @@ namespace SemiAppsDev
          this.tabPage1.Controls.Add(this.label7);
          this.tabPage1.Controls.Add(this.label6);
          this.tabPage1.Controls.Add(this.label5);
-         this.tabPage1.Controls.Add(this.label4);
-         this.tabPage1.Controls.Add(this.dateTimePicker);
          this.tabPage1.Controls.Add(this.label3);
          this.tabPage1.Controls.Add(this.label2);
          this.tabPage1.Controls.Add(this.txtStockout);
@@ -163,6 +161,17 @@ namespace SemiAppsDev
          this.tabPage1.Text = "Add | Update Inventory";
          this.tabPage1.UseVisualStyleBackColor = true;
          // 
+         // btnReorder
+         // 
+         this.btnReorder.Location = new System.Drawing.Point(405, 282);
+         this.btnReorder.Name = "btnReorder";
+         this.btnReorder.Size = new System.Drawing.Size(75, 23);
+         this.btnReorder.TabIndex = 21;
+         this.btnReorder.Text = "Reorder";
+         this.btnReorder.UseVisualStyleBackColor = true;
+         this.btnReorder.Visible = false;
+         this.btnReorder.Click += new System.EventHandler(this.btnReorder_Click);
+         // 
          // txtInvetoryID
          // 
          this.txtInvetoryID.Location = new System.Drawing.Point(326, 86);
@@ -174,7 +183,7 @@ namespace SemiAppsDev
          // btnDelete
          // 
          this.btnDelete.Enabled = false;
-         this.btnDelete.Location = new System.Drawing.Point(389, 278);
+         this.btnDelete.Location = new System.Drawing.Point(306, 282);
          this.btnDelete.Name = "btnDelete";
          this.btnDelete.Size = new System.Drawing.Size(75, 23);
          this.btnDelete.TabIndex = 19;
@@ -210,7 +219,7 @@ namespace SemiAppsDev
          // label7
          // 
          this.label7.AutoSize = true;
-         this.label7.Location = new System.Drawing.Point(46, 250);
+         this.label7.Location = new System.Drawing.Point(46, 202);
          this.label7.Name = "label7";
          this.label7.Size = new System.Drawing.Size(53, 13);
          this.label7.TabIndex = 15;
@@ -219,11 +228,11 @@ namespace SemiAppsDev
          // label6
          // 
          this.label6.AutoSize = true;
-         this.label6.Location = new System.Drawing.Point(18, 32);
+         this.label6.Location = new System.Drawing.Point(33, 32);
          this.label6.Name = "label6";
-         this.label6.Size = new System.Drawing.Size(102, 13);
+         this.label6.Size = new System.Drawing.Size(78, 13);
          this.label6.TabIndex = 14;
-         this.label6.Text = "Product category ID";
+         this.label6.Text = "Category name";
          // 
          // label5
          // 
@@ -233,27 +242,10 @@ namespace SemiAppsDev
          this.label5.Size = new System.Drawing.Size(0, 13);
          this.label5.TabIndex = 13;
          // 
-         // label4
-         // 
-         this.label4.AutoSize = true;
-         this.label4.Location = new System.Drawing.Point(69, 205);
-         this.label4.Name = "label4";
-         this.label4.Size = new System.Drawing.Size(30, 13);
-         this.label4.TabIndex = 12;
-         this.label4.Text = "Date";
-         // 
-         // dateTimePicker
-         // 
-         this.dateTimePicker.Enabled = false;
-         this.dateTimePicker.Location = new System.Drawing.Point(126, 199);
-         this.dateTimePicker.Name = "dateTimePicker";
-         this.dateTimePicker.Size = new System.Drawing.Size(154, 20);
-         this.dateTimePicker.TabIndex = 11;
-         // 
          // label3
          // 
          this.label3.AutoSize = true;
-         this.label3.Location = new System.Drawing.Point(34, 159);
+         this.label3.Location = new System.Drawing.Point(34, 160);
          this.label3.Name = "label3";
          this.label3.Size = new System.Drawing.Size(77, 13);
          this.label3.TabIndex = 10;
@@ -270,7 +262,7 @@ namespace SemiAppsDev
          // 
          // txtStockout
          // 
-         this.txtStockout.Location = new System.Drawing.Point(126, 243);
+         this.txtStockout.Location = new System.Drawing.Point(126, 195);
          this.txtStockout.Name = "txtStockout";
          this.txtStockout.Size = new System.Drawing.Size(154, 20);
          this.txtStockout.TabIndex = 8;
@@ -278,7 +270,7 @@ namespace SemiAppsDev
          // txtStockonHand
          // 
          this.txtStockonHand.Enabled = false;
-         this.txtStockonHand.Location = new System.Drawing.Point(126, 152);
+         this.txtStockonHand.Location = new System.Drawing.Point(126, 153);
          this.txtStockonHand.Name = "txtStockonHand";
          this.txtStockonHand.Size = new System.Drawing.Size(154, 20);
          this.txtStockonHand.TabIndex = 6;
@@ -308,20 +300,10 @@ namespace SemiAppsDev
          this.label1.TabIndex = 3;
          this.label1.Text = "Product name";
          // 
-         // btnUpdate
-         // 
-         this.btnUpdate.Enabled = false;
-         this.btnUpdate.Location = new System.Drawing.Point(292, 278);
-         this.btnUpdate.Name = "btnUpdate";
-         this.btnUpdate.Size = new System.Drawing.Size(75, 23);
-         this.btnUpdate.TabIndex = 1;
-         this.btnUpdate.Text = "Update";
-         this.btnUpdate.UseVisualStyleBackColor = true;
-         // 
          // btnSave
          // 
          this.btnSave.Enabled = false;
-         this.btnSave.Location = new System.Drawing.Point(187, 278);
+         this.btnSave.Location = new System.Drawing.Point(104, 282);
          this.btnSave.Name = "btnSave";
          this.btnSave.Size = new System.Drawing.Size(75, 23);
          this.btnSave.TabIndex = 0;
@@ -357,6 +339,7 @@ namespace SemiAppsDev
          this.txtSearch.Name = "txtSearch";
          this.txtSearch.Size = new System.Drawing.Size(100, 20);
          this.txtSearch.TabIndex = 1;
+         this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
          // 
          // dataGridProduct
          // 
@@ -370,7 +353,7 @@ namespace SemiAppsDev
          // tabPage3
          // 
          this.tabPage3.Controls.Add(this.label9);
-         this.tabPage3.Controls.Add(this.textBox1);
+         this.tabPage3.Controls.Add(this.txtSearch2);
          this.tabPage3.Controls.Add(this.dataGridInventory);
          this.tabPage3.Location = new System.Drawing.Point(4, 22);
          this.tabPage3.Name = "tabPage3";
@@ -388,12 +371,13 @@ namespace SemiAppsDev
          this.label9.TabIndex = 18;
          this.label9.Text = "Search";
          // 
-         // textBox1
+         // txtSearch2
          // 
-         this.textBox1.Location = new System.Drawing.Point(242, 7);
-         this.textBox1.Name = "textBox1";
-         this.textBox1.Size = new System.Drawing.Size(100, 20);
-         this.textBox1.TabIndex = 17;
+         this.txtSearch2.Location = new System.Drawing.Point(242, 7);
+         this.txtSearch2.Name = "txtSearch2";
+         this.txtSearch2.Size = new System.Drawing.Size(100, 20);
+         this.txtSearch2.TabIndex = 17;
+         this.txtSearch2.TextChanged += new System.EventHandler(this.txtSearch2_TextChanged);
          // 
          // dataGridInventory
          // 
@@ -403,6 +387,17 @@ namespace SemiAppsDev
          this.dataGridInventory.Size = new System.Drawing.Size(537, 282);
          this.dataGridInventory.TabIndex = 16;
          this.dataGridInventory.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridInventory_CellMouseClick);
+         // 
+         // btnUpdate
+         // 
+         this.btnUpdate.Enabled = false;
+         this.btnUpdate.Location = new System.Drawing.Point(209, 282);
+         this.btnUpdate.Name = "btnUpdate";
+         this.btnUpdate.Size = new System.Drawing.Size(75, 23);
+         this.btnUpdate.TabIndex = 1;
+         this.btnUpdate.Text = "Update";
+         this.btnUpdate.UseVisualStyleBackColor = true;
+         this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
          // 
          // InventoryDetails
          // 
@@ -445,15 +440,12 @@ namespace SemiAppsDev
       private System.Windows.Forms.Label label7;
       private System.Windows.Forms.Label label6;
       private System.Windows.Forms.Label label5;
-      private System.Windows.Forms.Label label4;
-      private System.Windows.Forms.DateTimePicker dateTimePicker;
       private System.Windows.Forms.Label label3;
       private System.Windows.Forms.Label label2;
       private System.Windows.Forms.TextBox txtStockonHand;
       private System.Windows.Forms.TextBox txtPrice;
       private System.Windows.Forms.TextBox txtProductname;
       private System.Windows.Forms.Label label1;
-      private System.Windows.Forms.Button btnUpdate;
       private System.Windows.Forms.Button btnSave;
       private System.Windows.Forms.TabPage tabPage2;
       private System.Windows.Forms.TextBox txtSearch;
@@ -464,7 +456,9 @@ namespace SemiAppsDev
       private System.Windows.Forms.TextBox txtInvetoryID;
       private System.Windows.Forms.TabPage tabPage3;
       private System.Windows.Forms.Label label9;
-      private System.Windows.Forms.TextBox textBox1;
+      private System.Windows.Forms.TextBox txtSearch2;
       private System.Windows.Forms.DataGridView dataGridInventory;
+      private System.Windows.Forms.Button btnReorder;
+      private System.Windows.Forms.Button btnUpdate;
    }
 }
